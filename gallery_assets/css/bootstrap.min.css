@@ -140,7 +140,7 @@ sup {
   top: -.5em; }
 
 a {
-  color: #ef6c57;
+  color: #000000;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
@@ -309,8 +309,7 @@ h1, h2, h3, h4, h5, h6,
   line-height: 1.2;
   color: inherit; }
 
-h1, .h1 {
-  font-size: 2.5rem; }
+
 
 h2, .h2 {
   font-size: 2rem; }
