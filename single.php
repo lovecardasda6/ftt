@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-1<html lang="en">
+<html lang="en">
   <head>
     <title>Shutter &mdash; Colorlib Website Template</title>
     <meta charset="utf-8">
