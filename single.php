@@ -94,7 +94,7 @@
   
     <div class="row pt-4 mb-5 text-center"><!-- START .site-navbar-wrap -->
 		<div class="col-12 col-md-2">
-            <a href="photos.php" class="nav-link" style="margin: 15px 0px;"><h4>< <span style="text-decoration:underline;">back<span></h4></a>
+            <a href="photos.php" class="nav-link" style="margin: 15px 0px;"><h4>< <span style="text-decoration:underline;">Back<span></h4></a>
         </div>
         <div class="col-12 col-md-10">
             <h2 >'Nature' &mdash; 19 Photos</h2>
@@ -105,169 +105,168 @@
 	
     <div class="container-fluid photos"><!-- START .site-navbar-wrap -->
       <div class="row align-items-stretch">
-        
-        <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up">
-          <a href="./gallery_assets/images/img_1.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_1.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="./gallery_assets/images/img_2.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_2.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-          <a href="./gallery_assets/images/img_3.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_3.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
 
-        <div class="col-6 col-md-6 col-lg-8" data-aos="fade-up">
-          <a href="./gallery_assets/images/img_4.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_4.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-          <a href="./gallery_assets/images/img_5.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_5.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
+          <?php
+            $conn = mysqli_connect("localhost", "root", "", "ftt");
 
-        <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up">
-          <a href="./gallery_assets/images/img_6.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_6.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="./gallery_assets/images/img_7.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_7.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
+            $query = "SELECT * FROM images WHERE album_id = ".$_GET['id'];
+            if($result = mysqli_query($conn ,$query)){
 
+              $count = 0;
+              while($row = mysqli_fetch_assoc($result)){   
+          ?>
 
-        <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-          <a href="./gallery_assets/images/img_8.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_8.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-          <a href="./gallery_assets/images/img_9.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_9.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-          <a href="./gallery_assets/images/img_10.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_10.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
+          <?php if($count == 0){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up">
+            <a href="./gallery_assets/images/img_1.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_1.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
 
+        <?php if($count == 1){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <a href="./gallery_assets/images/img_2.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_2.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
 
-        <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up">
-          <a href="./gallery_assets/images/img_1.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_1.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="./gallery_assets/images/img_2.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_2.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-          <a href="./gallery_assets/images/img_3.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_3.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
+        <?php if($count == 2){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+            <a href="./gallery_assets/images/img_3.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_3.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
 
-        <div class="col-6 col-md-6 col-lg-8" data-aos="fade-up">
-          <a href="./gallery_assets/images/img_4.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_4.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-          <a href="./gallery_assets/images/img_5.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_5.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
+          <?php if($count == 3){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-8" data-aos="fade-up">
+            <a href="./gallery_assets/images/img_4.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_4.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
 
-        <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up">
-          <a href="./gallery_assets/images/img_6.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_6.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <a href="./gallery_assets/images/img_7.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_7.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
+          <?php if($count == 4){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <a href="./gallery_assets/images/img_5.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_5.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
 
+          <?php if($count == 5){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up">
+            <a href="./gallery_assets/images/img_6.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_6.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
 
-        <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-          <a href="./gallery_assets/images/img_8.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_8.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-6 col-lg-8" data-aos="fade-up" data-aos-delay="100">
-          <a href="./gallery_assets/images/img_9.jpg" class="d-block photo-item" data-fancybox="gallery">
-            <img src="./gallery_assets/images/img_9.jpg" alt="Image" class="img-fluid">
-            <div class="photo-text-more">
-              <span class="icon icon-search"></span>
-            </div>
-          </a>
-        </div>
+          <?php if($count == 6){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <a href="./gallery_assets/images/img_7.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_7.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
+
+          <?php if($count == 7){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+            <a href="./gallery_assets/images/img_8.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_8.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
+
+          <?php if($count == 8){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <a href="./gallery_assets/images/img_9.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_9.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
+
+          <?php if($count == 9){ ?>
+          <!-- START .site-navbar-wrap -->
+          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <a href="./gallery_assets/images/img_5.jpg" class="d-block photo-item" data-fancybox="gallery">
+              <img src="./gallery_assets/images/img_5.jpg" alt="Image" class="img-fluid">
+              <div class="photo-text-more">
+                <span class="icon icon-search"></span>
+              </div>
+            </a>
+          </div>
+          <?php
+            }
+          ?>
+          
+
+              <?php
+              $count++;
+
+              if($count == 10){
+                $count = 0;
+              }
+              }
+            }
+              ?>
+
         
 
       </div>
