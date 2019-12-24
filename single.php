@@ -23,6 +23,7 @@
 
     <link rel="stylesheet" href="./gallery_assets/css/style.css">
     
+    <link rel="stylesheet" href="css/custom.css">
   </head>
   <body>
   
@@ -93,12 +94,26 @@
   <main class="main-content col-lg-12 mb-12" style="width: 100%;">
   
     <div class="row pt-4 mb-5 text-center"><!-- START .site-navbar-wrap -->
-		<div class="col-12 col-md-2">
+		    <div class="col-12 col-md-12 blockade2">
             <a href="photos.php" class="nav-link" style="margin: 15px 0px;"><h4>< <span style="text-decoration:underline;">Back<span></h4></a>
         </div>
-        <div class="col-12 col-md-10">
-            <h2 >'Nature' &mdash; 19 Photos</h2>
-			<p>December 23, 2019</p>
+        <div class="col-12 col-md-12">
+          <?php
+            $conn = mysqli_connect("localhost", "root", "", "ftt");
+
+            $q = "SELECT * FROM albums WHERE id = ".$_GET['id'];
+            $res = mysqli_query($conn, $q);
+            $row = mysqli_fetch_assoc($res);
+
+          ?>
+            <h2><?php echo $row["title"]; ?></h2>
+			      <p><?php echo date_format(date_create($row["posted"]),"F d, Y"); ?></p>
+            
+        </div>
+        <div class="container">
+          <p>
+            <?php echo $row["description"]; ?>
+          </p>
         </div>
     </div><!-- END .site-navbar-wrap -->
 	
@@ -107,20 +122,18 @@
       <div class="row align-items-stretch">
 
           <?php
-            $conn = mysqli_connect("localhost", "root", "", "ftt");
-
             $query = "SELECT * FROM images WHERE album_id = ".$_GET['id'];
             if($result = mysqli_query($conn ,$query)){
 
               $count = 0;
-              while($row = mysqli_fetch_assoc($result)){   
+              while($row = mysqli_fetch_row($result)){   
           ?>
 
           <?php if($count == 0){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up">
-            <a href="./gallery_assets/images/img_1.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_1.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
@@ -133,8 +146,8 @@
         <?php if($count == 1){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <a href="./gallery_assets/images/img_2.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_2.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
@@ -147,8 +160,8 @@
         <?php if($count == 2){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-            <a href="./gallery_assets/images/img_3.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_3.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
@@ -161,8 +174,8 @@
           <?php if($count == 3){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-8" data-aos="fade-up">
-            <a href="./gallery_assets/images/img_4.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_4.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
@@ -175,8 +188,8 @@
           <?php if($count == 4){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <a href="./gallery_assets/images/img_5.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_5.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
@@ -189,8 +202,8 @@
           <?php if($count == 5){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up">
-            <a href="./gallery_assets/images/img_6.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_6.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
@@ -203,8 +216,8 @@
           <?php if($count == 6){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <a href="./gallery_assets/images/img_7.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_7.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
@@ -217,8 +230,8 @@
           <?php if($count == 7){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-            <a href="./gallery_assets/images/img_8.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_8.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
@@ -231,8 +244,8 @@
           <?php if($count == 8){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <a href="./gallery_assets/images/img_9.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_9.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
@@ -245,8 +258,8 @@
           <?php if($count == 9){ ?>
           <!-- START .site-navbar-wrap -->
           <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <a href="./gallery_assets/images/img_5.jpg" class="d-block photo-item" data-fancybox="gallery">
-              <img src="./gallery_assets/images/img_5.jpg" alt="Image" class="img-fluid">
+            <a href="<?php echo "./photos/".$row[2]; ?>" class="d-block photo-item" data-fancybox="gallery">
+              <img src="<?php echo "./photos/".$row[2]; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
               </div>
