@@ -1,0 +1,10 @@
+@media (max-width: 1280) {
+    .blockade{
+		text-align: center; 
+		padding-top: 15px; 
+		float: right;
+		border:1px solid; 
+		position: absolute; 
+		right: 0px;
+	}
+}
