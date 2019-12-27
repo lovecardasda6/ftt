@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2019 at 04:54 AM
+-- Generation Time: Dec 27, 2019 at 05:33 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.1.33
 
@@ -30,15 +30,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `address` (
   `id` int(11) NOT NULL,
-  `address` varchar(500) NOT NULL
+  `address` varchar(500) NOT NULL,
+  `action` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `address`
 --
 
-INSERT INTO `address` (`id`, `address`) VALUES
-(1, '16 J.A. Clarin Street Tagbilaran City near Florencio\'s Caltex Station');
+INSERT INTO `address` (`id`, `address`, `action`) VALUES
+(1, '16 J.A. Clarin Street Tagbilaran City near Florencio\'s Caltex Station', 'ACTIVE');
 
 -- --------------------------------------------------------
 
@@ -61,16 +62,17 @@ CREATE TABLE `albums` (
 
 CREATE TABLE `email_address` (
   `id` int(11) NOT NULL,
-  `email_address` varchar(150) NOT NULL
+  `email_address` varchar(150) NOT NULL,
+  `action` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `email_address`
 --
 
-INSERT INTO `email_address` (`id`, `email_address`) VALUES
-(1, 'elystoursandtravel@yahoo.com'),
-(2, 'ftt_bookings@yahoo.com');
+INSERT INTO `email_address` (`id`, `email_address`, `action`) VALUES
+(1, 'felystoursandtravel@yahoo.com', 'ACTIVE'),
+(2, 'ftt_bookings@yahoo.com', 'ACTIVE');
 
 -- --------------------------------------------------------
 
@@ -80,18 +82,19 @@ INSERT INTO `email_address` (`id`, `email_address`) VALUES
 
 CREATE TABLE `mobile_number` (
   `id` int(11) NOT NULL,
-  `mobile_number` varchar(60) NOT NULL
+  `mobile_number` varchar(60) NOT NULL,
+  `action` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `mobile_number`
 --
 
-INSERT INTO `mobile_number` (`id`, `mobile_number`) VALUES
-(1, '0916-359-6126'),
-(2, '0915-829-5095'),
-(3, '0922-300-1458'),
-(4, '0939-904-5521');
+INSERT INTO `mobile_number` (`id`, `mobile_number`, `action`) VALUES
+(1, '0916-359-6126', 'ACTIVE'),
+(2, '0915-829-5095', 'ACTIVE'),
+(3, '0922-300-1458', 'ACTIVE'),
+(4, '0939-904-5521', 'ACTIVE');
 
 -- --------------------------------------------------------
 
@@ -177,17 +180,18 @@ INSERT INTO `services` (`id`, `type`, `name`, `description`, `image`, `action`) 
 
 CREATE TABLE `telephone_number` (
   `id` int(11) NOT NULL,
-  `tel_number` varchar(60) NOT NULL
+  `tel_number` varchar(60) NOT NULL,
+  `action` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `telephone_number`
 --
 
-INSERT INTO `telephone_number` (`id`, `tel_number`) VALUES
-(1, '(038) 411-4476'),
-(2, '(038) 416-1198'),
-(3, '(038) 510-1652');
+INSERT INTO `telephone_number` (`id`, `tel_number`, `action`) VALUES
+(1, '(038) 411-4476', 'ACTIVE'),
+(2, '(038) 416-1198', 'ACTIVE'),
+(3, '(038) 510-1652', 'ACTIVE');
 
 -- --------------------------------------------------------
 
