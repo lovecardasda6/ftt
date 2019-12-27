@@ -135,7 +135,7 @@
                               <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
                               <li><a href="tour_destinations.php" class="nav-link">New Destinations</a></li>
                               <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="index.php#contact-section" class="nav-link">Contact</a></li>
+                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
                               <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
                             </ul>
                             </div>
@@ -158,7 +158,7 @@
           </div>
           <div class="col-lg-6 section-title" style="text-align:right;">
             <a href="#">
-                <span class="icon-add" style="font-size:24px;" onclick="$('.add_new_package').css('display', 'block ');" >Add New Package</span>
+                <span class="icon-add" style="font-size:24px;" onclick="$('.add_new_package').css('display', 'block ');" >Add Package</span>
             </a>
           </div>
         </div>

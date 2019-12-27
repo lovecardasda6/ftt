@@ -83,7 +83,7 @@
                               <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
                               <li><a href="tour_destinations.php" class="nav-link">New Destinations</a></li>
                               <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="index.php#contact-section" class="nav-link">Contact</a></li>
+                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
                               <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
                             </ul>
                             </div>

@@ -5,51 +5,64 @@
   $action = @$_GET['action'];
 
   if($action == "ARCHIVE"){
-    $action_query = "UPDATE tour_destinations SET action = 'ARCHIVE' WHERE id=".$id;
+    $action_query = "UPDATE tour_packages SET action = 'ARCHIVE' WHERE id=".$id;
     $exec = mysqli_query($con, $action_query);
   }else if($action == "ACTIVE"){
-    $action_query = "UPDATE tour_destinations SET action = 'ACTIVE' WHERE id=".$id;
+    $action_query = "UPDATE tour_packages SET action = 'ACTIVE' WHERE id=".$id;
+    $exec = mysqli_query($con, $action_query);
+  }else if($action == "REMOVE"){
+    $action_query = "DELETE FROM tour_packages WHERE id=".$id;
     $exec = mysqli_query($con, $action_query);
   }
 
   if(isset($_POST['save'])){
-    $destinations = mysqli_real_escape_string($con, $_POST['destinations']);
-    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $package_name = mysqli_real_escape_string($con, $_POST['package_name']);
+    $package_price = mysqli_real_escape_string($con, $_POST['package_price']);
 
-    $save_query = "INSERT INTO `tour_destinations` (`destinations`, `description`) VALUES ('".$destinations."', '".$description."')";
+    $save_query = "INSERT INTO `tour_packages`(`package_name`, `price`, `action`) VALUES ('".$package_name."', '".$package_price."', 'ACTIVE')";
     $exec = mysqli_query($con, $save_query);
     $exec_id = mysqli_insert_id($con);
 
-    if($exec){
+    $destinations = array();
+    if($_POST['destination1'] != null || !empty($_POST['destination1']))
+      array_push($destinations, $_POST['destination1']);
 
-        $image1_name = $_FILES["image1"]['name'];
-        $image1_tmp =$_FILES['image1']['tmp_name'];
+    if($_POST['destination2'] != null || !empty($_POST['destination2']))
+      array_push($destinations, $_POST['destination2']);
 
-        if($image1_name != null || !empty($image1_name)){
-            $image1_name = date('dmYHis').$_FILES["image1"]['name'];
+    if($_POST['destination3'] != null || !empty($_POST['destination3']))
+      array_push($destinations, $_POST['destination3']);
 
-            $save_query = "INSERT INTO `tour_destination_image` (`tour_destination_id`, `image`) VALUES ('".$exec_id."', '".$image1_name."')";
-            $exec = mysqli_query($con, $save_query);
+    if($_POST['destination4'] != null || !empty($_POST['destination4']))
+      array_push($destinations, $_POST['destination4']);
 
-            $image_dir = "./../images/tour_destinations/".$image1_name;
-            move_uploaded_file($image1_tmp, $image_dir);
+    if($_POST['destination5'] != null || !empty($_POST['destination5']))
+      array_push($destinations, $_POST['destination5']);
 
-        }
+    if($_POST['destination6'] != null || !empty($_POST['destination6']))
+      array_push($destinations, $_POST['destination6']);
 
-        $image2_name = $_FILES["image2"]['name'];
-        $image2_tmp =$_FILES['image2']['tmp_name'];
-        if($image2_name != null || !empty($image2_name)){
-            $image2_name = date('dmYHis').$_FILES["image2"]['name'];
+    if($_POST['destination7'] != null || !empty($_POST['destination7']))
+      array_push($destinations, $_POST['destination7']);
 
-            $save_query = "INSERT INTO `tour_destination_image` (`tour_destination_id`, `image`) VALUES ('".$exec_id."', '".$image2_name."')";
-            $exec = mysqli_query($con, $save_query);
+    if($_POST['destination8'] != null || !empty($_POST['destination8']))
+      array_push($destinations, $_POST['destination8']);
 
-            $image_dir = "./../images/tour_destinations/".$image2_name;
-            move_uploaded_file($image2_tmp, $image_dir);
-           
-        }
-        
-        
+    if($_POST['destination9'] != null || !empty($_POST['destination9']))
+      array_push($destinations, $_POST['destination9']);
+
+    if($_POST['destination10'] != null || !empty($_POST['destination10']))
+      array_push($destinations, $_POST['destination10']);
+
+    if($_POST['destination11'] != null || !empty($_POST['destination11']))
+      array_push($destinations, $_POST['destination11']);
+
+    if($_POST['destination12'] != null || !empty($_POST['destination12']))
+      array_push($destinations, $_POST['destination12']);
+    
+    foreach($destinations as $destination){
+      $destination_query = "INSERT INTO `package_destinations`(`tour_package_id`, `destination`) VALUES ('".$exec_id."', '".$destination."')";
+      $exec = mysqli_query($con, $destination_query);
     }
 
 
@@ -136,16 +149,16 @@
         <!---------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------->
 <!-- .START site-section -->
-    <div class="site-section bg-light" id="what-we-do-section" style="margin:-75px;">
+    <div class="site-section bg-light" id="what-we-do-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-lg-6 section-title">
-            <h2 class="title text-primary">TOUR DESTINATIONS</h2>
-            <span class="sub-title mb-2 d-block">ACTIVE DESTINATIONS</span>
+            <h2 class="title text-primary">TOUR PACKAGE</h2>
+            <span class="sub-title mb-2 d-block">ACTIVE PACKAGE</span>
           </div>
           <div class="col-lg-6 section-title" style="text-align:right;">
             <a href="#">
-                <span class="icon-add" style="font-size:24px;" onclick="$('.add_new_destinations').css('display', 'block ');" >Add Destination</span>
+                <span class="icon-add" style="font-size:24px;" onclick="$('.add_new_package').css('display', 'block ');" >Add Contact</span>
             </a>
           </div>
         </div>
@@ -154,13 +167,13 @@
             <div class="row">
 
               <?php
-                $tour_package_query = "SELECT * FROM tour_destinations WHERE action != 'ARCHIVE' ORDER BY destinations ASC";
+                $tour_package_query = "SELECT * FROM tour_packages WHERE action != 'ARCHIVE' ORDER BY package_name ASC";
 
                 if($result = mysqli_query($con, $tour_package_query))
                 {
                   while($row = mysqli_fetch_assoc($result )){
-                    // $package_id = $row['id'];
-                    // $package_destionation_query = "SElECT * FROM tour_destinations WHERE tour_package_id = ".$package_id;
+                    $package_id = $row['id'];
+                    $package_destionation_query = "SElECT * FROM package_destinations WHERE tour_package_id = ".$package_id;
 
               ?>
                   <!---------------------------------->
@@ -174,14 +187,23 @@
                     </div>
 
 
-                      
-                    <h3><?php echo $row["destinations"] ?></h3>
-                    <li><?php echo substr($row['description'], 0, 400); ?>.....</li>
-                    <p><a target="_blank" href="destinations_read.php?id=<?php echo $row['id']; ?>" class="readmore">Read more</a></p>
-
-                    <br>
+                      <span class="icon-map-marker display-4 text-primary d-block mb-4"></span>
+                      <h3><?php echo $row["package_name"] ?></h3>
+                      <?php
+                        $package_destionation_query = "SElECT * FROM package_destinations WHERE tour_package_id = ".$package_id." ORDER BY destination ASC";
+                        if($result2 = mysqli_query($con, $package_destionation_query)){
+                          while($row2 = mysqli_fetch_assoc($result2)){
+                      ?>
+                        <li><?php echo $row2['destination']; ?></li>
+                      <?php
+                          }
+                        }
+                      ?>
+                      <br>
                       <span class="sub-title mb-2 d-block">
-                        <a target="_blank" href="tour_destinations_modify.php?id=<?php echo $row['id']; ?>">
+                        <h5 class="title text-primary">Price : Php <?php echo $row['price']; ?></h5>
+
+                        <a target="_blank" href="package_tours_modify.php?id=<?php echo $row['id']; ?>">
                           <span class="icon-edit" style="font-size: 24px;"></span>
                         </a> 
                         &nbsp; | &nbsp;
@@ -210,7 +232,7 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-lg-6 section-title">
-            <span class="sub-title mb-2 d-block">ARCHIVED DESTINATIONS</span>
+            <span class="sub-title mb-2 d-block">ARCHIVED PACKAGE</span>
           </div>
         </div>
         <div class="row">
@@ -218,11 +240,13 @@
             <div class="row">
 
               <?php
-                $tour_package_query = "SELECT * FROM tour_destinations WHERE action='ARCHIVE' ORDER BY destinations ASC";
+                $tour_package_query = "SELECT * FROM tour_packages WHERE action='ARCHIVE' ORDER BY package_name ASC";
 
                 if($result = mysqli_query($con, $tour_package_query))
                 {
                   while($row = mysqli_fetch_assoc($result )){
+                    $package_id = $row['id'];
+                    $package_destionation_query = "SElECT * FROM package_destinations WHERE tour_package_id = ".$package_id;
 
               ?>
                   <!---------------------------------->
@@ -236,13 +260,23 @@
                     </div>
 
 
-                    <h3><?php echo $row["destinations"] ?></h3>
-                    <li><?php echo substr($row['description'], 0, 400); ?>.....</li>
-                    <p><a target="_blank" href="destinations_read.php?id=<?php echo $row['id']; ?>" class="readmore">Read more</a></p>
-
+                      <span class="icon-map-marker display-4 text-primary d-block mb-4"></span>
+                      <h3><?php echo $row["package_name"] ?></h3>
+                      <?php
+                        $package_destionation_query = "SElECT * FROM package_destinations WHERE tour_package_id = ".$package_id." ORDER BY destination ASC";
+                        if($result2 = mysqli_query($con, $package_destionation_query)){
+                          while($row2 = mysqli_fetch_assoc($result2)){
+                      ?>
+                        <li><?php echo $row2['destination']; ?></li>
+                      <?php
+                          }
+                        }
+                      ?>
                       <br>
                       <span class="sub-title mb-2 d-block">
-                        <a target="_blank" href="tour_destinations_modify.php?id=<?php echo $row['id']; ?>">
+                        <h5 class="title text-primary">Price : Php <?php echo $row['price']; ?></h5>
+
+                        <a target="_blank" href="package_tours_modify.php?id=<?php echo $row['id']; ?>">
                           <span class="icon-edit" style="font-size: 24px;"></span>
                         </a> 
                         &nbsp; | &nbsp;
@@ -291,9 +325,9 @@
 
 
 <!----------------------------------------------------------->
-<!------------------ADD NEW SERVICE FORM AIRLINE------------->
+<!---------------------ADD NEW PACKAGE FORM------------------>
 <!----------------------------------------------------------->
-<div class="add_new_destinations" 
+<div class="add_new_package" 
 style="
     display: none;
     position: absolute; 
@@ -307,32 +341,35 @@ style="
 ">
     <div style="width: 50%; margin:auto;">  
         <div class="service h-100">
-            <div class="col-lg-12 section-title">
-                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Destination Informations</span>
+            <div class="col-lg-6 section-title">
+                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Package Informations</span>
             </div>
 
-            <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off" enctype="multipart/form-data">
-                <label for="avatar">Recommended image size : 450pixel x 450pixel</label>
+            <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off">
+                <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="package_price" placeholder="Price" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
                 <Br>
-                <input type="file"
-                      id="avatar" name="image1"
-                      accept="image/png, image/jpeg">
                 <br>
-                <Br>
-                <input type="file"
-                      id="avatar" name="image2"
-                      accept="image/png, image/jpeg">
-                <br><br>
-                <input type="text" require name="destinations" placeholder="Destination" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:15px;" /> 
-                <label>Destination Description</label>
-                <textarea name="description" style="width: 100%; height: 300px; font-size: 18px; margin-bottom:5px;"> </textarea>
-                <br>
-                <input type="submit" value="Save" name="save" class="btn btn-primary"/> | <button onclick="$('.add_new_package').css('display', 'none');" class="btn btn-light">Cancel</button>
+                <span style="font-size:18px; color: rgb(0,123,255); font-weight:bold;">Destinations</span>
+                <input type="text" name="destination1" placeholder="Destination 1" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination2" placeholder="Destination 2" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination3" placeholder="Destination 3" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination4" placeholder="Destination 4" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination5" placeholder="Destination 5" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination6" placeholder="Destination 6" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination7" placeholder="Destination 7" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination8" placeholder="Destination 8" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination9" placeholder="Destination 9" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination10" placeholder="Destination 10" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination11" placeholder="Destination 11" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <input type="text" name="destination12" placeholder="Destination 12" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+                <br> <br>
+                <input type="submit" value="Save" name="save"/> | <button onclick="$('.add_new_package').css('display', 'none');">Cancel</button>
             </form>
 
         </div>
     </div>
 </div>
 <!----------------------------------------------------------->
-<!------------------ADD NEW SERVICE FORM AIRLINE------------->
+<!---------------------ADD NEW PACKAGE FORM------------------>
 <!----------------------------------------------------------->
