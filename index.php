@@ -519,25 +519,62 @@
           <br>
               <div class="service h-100">
                   <span class="icon-map-marker display-4 text-primary d-block mb-4" style="font-size: 22px;"> Address </span>
-                  <h3>16 J.A. Clarin Street Tagbilaran City
-                      near Florencio's Caltex Station</h3>
-                    <br>
+                    <?php
+                      $q = "SELECT * FROM address WHERE `action` != 'ARCHIVE' ORDER BY address ASC";
+                      if($exec = mysqli_query($con, $q))
+                      {
+                        while($row = mysqli_fetch_assoc($exec))
+                        {
+                    ?>
+                    <h3><?php echo $row['address']; ?></h3>
+                    <?php
+                        }
+                      }
+                    ?>
+                  <br>
                   <span class="icon-phone display-4 text-primary d-block mb-4" style="font-size: 22px;">Call Us - Telephone No.</span>
-                    <h3>(038) 411-4476 </h3>
-                    <h3>(038) 416-1198 </h3>
-                    <h3>(038) 510-1652</h3>
-                    <br>
-                    <span class="icon-phone display-4 text-primary d-block mb-4" style="font-size: 22px;">Call Us - Mobile No.</span>
-                    <h3>0916-359-6126</h3>
-                    <h3>0915-829-5095</h3>
-                    <h3>0922-300-1458</h3>
-                    <h3>0939-904-5521</h3>
-                    <br>
-                    <span class="icon-phone display-4 text-primary d-block mb-4" style="font-size: 22px;">Email Address</span>
-                    <h3>felystoursandtravel@yahoo.com</h3>
-                    <h3>ftt_bookings@yahoo.com</h3>
-                    <br>
-                    <span class="icon-thumbs-o-up display-4 text-primary d-block mb-4" style="font-size: 22px;">Follow Us</span>
+                    <?php
+                      $q = "SELECT * FROM telephone_number WHERE `action` != 'ARCHIVE' ORDER BY tel_number ASC";
+                      if($exec = mysqli_query($con, $q))
+                      {
+                        while($row = mysqli_fetch_assoc($exec))
+                        {
+                    ?>
+                    <h3><?php echo $row['tel_number']; ?></h3>
+                    <?php
+                        }
+                      }
+                    ?>
+                  <br>
+                  <span class="icon-phone display-4 text-primary d-block mb-4" style="font-size: 22px;">Call Us - Mobile No.</span>
+                    <?php
+                      $q = "SELECT * FROM mobile_number WHERE `action` != 'ARCHIVE' ORDER BY mobile_number ASC";
+                      if($exec = mysqli_query($con, $q))
+                      {
+                        while($row = mysqli_fetch_assoc($exec))
+                        {
+                    ?>
+                    <h3><?php echo $row['mobile_number']; ?></h3>
+                    <?php
+                        }
+                      }
+                    ?>
+                  <br>
+                  <span class="icon-phone display-4 text-primary d-block mb-4" style="font-size: 22px;">Email Address</span>
+                    <?php
+                      $q = "SELECT * FROM email_address WHERE `action` != 'ARCHIVE' ORDER BY email_address ASC";
+                      if($exec = mysqli_query($con, $q))
+                      {
+                        while($row = mysqli_fetch_assoc($exec))
+                        {
+                    ?>
+                    <h3><?php echo $row['email_address']; ?></h3>
+                    <?php
+                        }
+                      }
+                    ?>
+                  <br>
+                  <span class="icon-thumbs-o-up display-4 text-primary d-block mb-4" style="font-size: 22px;">Follow Us</span>
                     <h3><span class="icon-facebook"></span> <a href="https://www.facebook.com/Felys-Tours-and-Travel-365299680961433/?modal=admin_todo_tour">Facebook</a> </h3>
                 </div>
 
