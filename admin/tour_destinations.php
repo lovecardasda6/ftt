@@ -13,8 +13,8 @@
   }
 
   if(isset($_POST['save'])){
-    $destinations = $_POST['destinations'];
-    $description = $_POST['description'];
+    $destinations = mysqli_real_escape_string($con, $_POST['destinations']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
 
     $save_query = "INSERT INTO `tour_destinations` (`destinations`, `description`) VALUES ('".$destinations."', '".$description."')";
     $exec = mysqli_query($con, $save_query);

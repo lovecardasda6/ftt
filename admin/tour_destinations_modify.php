@@ -13,14 +13,18 @@
   }
 
   if(isset($_POST['save'])){
-    $destination = $_POST['destination'];
-    $description = $_POST['description'];
-
-    $save_query = "INSERT INTO `tour_packages`(`package_name`, `price`, `action`) VALUES ('".$package_name."', '".$package_price."', 'ACTIVE')";
-    $exec = mysqli_query($con, $save_query);
-    $exec_id = mysqli_insert_id($con);
-
+    $destinations = mysqli_real_escape_string($con, $_POST['destinations']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
     
+    $save_query = "UPDATE `tour_destinations` SET `destinations` = '".$destinations."', `description` = '".$description."' WHERE `id` = ". $id;
+    $exec = mysqli_query($con, $save_query);
+
+    if($exec){
+        echo 1;
+    }
+    else{
+        echo mysqli_error($con);
+    }
   }
 
   $q = "SELECT * FROM tour_destinations WHERE id = ".$id;
@@ -42,9 +46,6 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    
-    <link rel="stylesheet" href="./gallery_assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="./gallery_assets/css/jquery-ui.css">
     
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
   
@@ -127,7 +128,7 @@
                 </div>
             </div>
             
-            <form method="post">
+            <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12 ml-auto">
                         <div class="row">
@@ -135,7 +136,7 @@
                             <Br>
                             <div class="col-lg-12 section-title">
                                 <label>Destination</label>
-                               <input class="form-control" style="border:1px solid rgba(0,0,0,0.2);" type="text" name="destination" placeholder="Destination" value="<?php echo $fetch['destinations']; ?>">
+                               <input class="form-control" style="border:1px solid rgba(0,0,0,0.2);" type="text" name="destinations" placeholder="Destination" value="<?php echo $fetch['destinations']; ?>">
                             </div>
                             <div class="row" style="margin:25px 0px;">
                             
@@ -150,7 +151,7 @@
                                         <img src="./../images/tour_destinations/<?php echo $rows['image']; ?>" style="padding: 0px 10px 0px 0px; width: 100%; margin-bottom: 10px;"/>
                                         <input type="hidden" name="id<?php echo $counter; ?>" value="<?php echo $rows['id']; ?>"/>
                                         <input type="file"
-                                            id="avatar" name="image<?php echo $counter; ?>"
+                                            name="image<?php echo $counter; ?>"
                                             accept="image/png, image/jpeg">
                                     </div>
                                 <?php
@@ -187,11 +188,6 @@
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/main.js"></script>
 
-  <script src="./gallery_assets/js/jquery-ui.js"></script>
-  <script src="./gallery_assets/js/jquery.stellar.min.js"></script>
-  <script src="./gallery_assets/js/jquery.countdown.min.js"></script>
-  <script src="./gallery_assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="./gallery_assets/js/bootstrap-datepicker.min.js"></script>
      
   </body>
 </html>
