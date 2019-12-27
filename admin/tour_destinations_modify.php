@@ -13,8 +13,8 @@
   }
 
   if(isset($_POST['save'])){
-    $package_name = $_POST['package_name'];
-    $package_price = $_POST['package_price'];
+    $destination = $_POST['destination'];
+    $description = $_POST['description'];
 
     $save_query = "INSERT INTO `tour_packages`(`package_name`, `price`, `action`) VALUES ('".$package_name."', '".$package_price."', 'ACTIVE')";
     $exec = mysqli_query($con, $save_query);
@@ -126,39 +126,48 @@
                     </span>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-12 ml-auto">
-                    <div class="row">
-                        <Br>
-                        <Br>
-                        <div class="col-lg-12 section-title">
-                            <span class="sub-title mb-2 d-block"><?php echo $fetch['destinations']; ?></span>
-                        </div>
-                        <Br>
+            
+            <form method="post">
+                <div class="row">
+                    <div class="col-lg-12 ml-auto">
                         <div class="row">
-                        <?php
-                            $q = "SELECT * FROM tour_destination_image WHERE tour_destination_id = ".$fetch['id'];
-                            if($res = mysqli_query($con, $q))
-                            {
-                                while($rows = mysqli_fetch_assoc($res)){
-                        ?>
-                            <div class="col-6 col-md-6 col-lg-6">
-                                <img src="./../images/tour_destinations/<?php echo $rows['image']; ?>" style="padding: 0px 10px; width: 100%;"/>
+                            <Br>
+                            <Br>
+                            <div class="col-lg-12 section-title">
+                                <label>Destination</label>
+                               <input class="form-control" style="border:1px solid rgba(0,0,0,0.2);" type="text" name="destination" placeholder="Destination" value="<?php echo $fetch['destinations']; ?>">
                             </div>
-                        <?php
-                                }
-                            }
-                        ?>
+                            <div class="row" style="margin:25px 0px;">
+                            
+                                <?php
+                                    $q = "SELECT * FROM tour_destination_image WHERE tour_destination_id = ".$fetch['id'];
+                                    if($res = mysqli_query($con, $q))
+                                    {
+                                        $counter = 1;
+                                        while($rows = mysqli_fetch_assoc($res)){
+                                ?>
+                                    <div class="col-6 col-md-6 col-lg-6">
+                                        <img src="./../images/tour_destinations/<?php echo $rows['image']; ?>" style="padding: 0px 10px 0px 0px; width: 100%; margin-bottom: 10px;"/>
+                                        <input type="hidden" name="id<?php echo $counter; ?>" value="<?php echo $rows['id']; ?>"/>
+                                        <input type="file"
+                                            id="avatar" name="image<?php echo $counter; ?>"
+                                            accept="image/png, image/jpeg">
+                                    </div>
+                                <?php
+                                            $counter++;
+                                        }
+                                    }
+                                ?>
+                            </div>
+                            <label>Destination Description</label>
+                            <textarea name="description" class="form-control" style="border:1px solid rgba(0,0,0,0.2);" rows="7"><?php echo $fetch['description']; ?></textarea>
+                            
+                            <input type="submit" class="btn btn-primary"  name="save" style="margin:25px 0px; padding: 10px 25px; border-radius:5px;" value="Update"/>
                         </div>
-                        <Br>
-                        <Br>
-                        <p>
-                            <?php echo $fetch['description']; ?>
-                        </p>
                     </div>
                 </div>
-            </div>
+            </form>
+
         </div>
     </div> <!-- END .site-section -->
 <!---------------------------------------------------------------------------------------------->
@@ -186,54 +195,3 @@
      
   </body>
 </html>
-
-
-<!----------------------------------------------------------->
-<!---------------------ADD NEW PACKAGE FORM------------------>
-<!----------------------------------------------------------->
-<div class="add_new_package" 
-style="
-    display: none;
-    position: absolute; 
-    top: 0; 
-    left:0; 
-    background-color: rgba(0,0,0,.5); 
-    width: 100%; 
-    height:100%; 
-    z-index: 100;
-    align-content:center;
-">
-    <div style="width: 50%; margin:auto;">  
-        <div class="service h-100">
-            <div class="col-lg-6 section-title">
-                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Package Informations</span>
-            </div>
-
-            <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off">
-                <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="package_price" placeholder="Price" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <Br>
-                <br>
-                <span style="font-size:18px; color: rgb(0,123,255); font-weight:bold;">Destinations</span>
-                <input type="text" name="destination1" placeholder="Destination 1" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination2" placeholder="Destination 2" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination3" placeholder="Destination 3" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination4" placeholder="Destination 4" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination5" placeholder="Destination 5" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination6" placeholder="Destination 6" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination7" placeholder="Destination 7" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination8" placeholder="Destination 8" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination9" placeholder="Destination 9" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination10" placeholder="Destination 10" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination11" placeholder="Destination 11" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination12" placeholder="Destination 12" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <br> <br>
-                <input type="submit" value="Save" name="save"/> | <button onclick="$('.add_new_package').css('display', 'none');">Cancel</button>
-            </form>
-
-        </div>
-    </div>
-</div>
-<!----------------------------------------------------------->
-<!---------------------ADD NEW PACKAGE FORM------------------>
-<!----------------------------------------------------------->
