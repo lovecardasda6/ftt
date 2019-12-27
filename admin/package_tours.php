@@ -16,8 +16,8 @@
   }
 
   if(isset($_POST['save'])){
-    $package_name = $_POST['package_name'];
-    $package_price = $_POST['package_price'];
+    $package_name = mysqli_real_escape_string($con, $_POST['package_name']);
+    $package_price = mysqli_real_escape_string($con, $_POST['package_price']);
 
     $save_query = "INSERT INTO `tour_packages`(`package_name`, `price`, `action`) VALUES ('".$package_name."', '".$package_price."', 'ACTIVE')";
     $exec = mysqli_query($con, $save_query);

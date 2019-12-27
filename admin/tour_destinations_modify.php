@@ -115,17 +115,6 @@
                 <div class="col-lg-6 section-title">
                     <h2 class="title text-primary">TOUR DESTINATIONS</h2>
                 </div>
-                <div class="col-lg-6 section-title" style="text-align:right;">
-                    <span class="sub-title mb-2 d-block">
-                        <a target="_blank" href="package_tours_modify.php?id=<?php echo $row['id']; ?>">
-                            <span class="icon-edit" style="font-size: 24px;"></span>
-                        </a> 
-                        &nbsp; | &nbsp;
-                        <a href="?id=<?php echo $fetch['id']; ?>&action=<?php echo $fetch['action'] == "ARCHIVE"? "ACTIVE" : "ARCHIVE"; ?>">
-                            <?php echo $fetch['action'] == "ARCHIVE"? "<span class='icon-check' style='font-size: 24px;'></span>" : "<span class='icon-archive' style='font-size: 24px;'></span>"; ?>
-                        </a>
-                    </span>
-                </div>
             </div>
             
             <form method="POST" autocomplete="off" enctype="multipart/form-data">

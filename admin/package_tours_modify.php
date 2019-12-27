@@ -4,8 +4,8 @@
   $id = @$_GET['id'];
 
   if(isset($_POST['save'])){
-    $package_name = $_POST['package_name'];
-    $package_price = $_POST['package_price'];
+    $package_name = mysqli_real_escape_string($con, $_POST['package_name']);
+    $package_price = mysqli_real_escape_string($con, $_POST['package_price']);
 
     $update_query = "UPDATE `tour_packages` SET `package_name`='".$package_name."', `price`='".$package_price."' WHERE id = ".$id;
     $exec = mysqli_query($con, $update_query);

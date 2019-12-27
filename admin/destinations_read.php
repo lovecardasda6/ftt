@@ -12,17 +12,6 @@
     $exec = mysqli_query($con, $action_query);
   }
 
-  if(isset($_POST['save'])){
-    $package_name = $_POST['package_name'];
-    $package_price = $_POST['package_price'];
-
-    $save_query = "INSERT INTO `tour_packages`(`package_name`, `price`, `action`) VALUES ('".$package_name."', '".$package_price."', 'ACTIVE')";
-    $exec = mysqli_query($con, $save_query);
-    $exec_id = mysqli_insert_id($con);
-
-    
-  }
-
   $q = "SELECT * FROM tour_destinations WHERE id = ".$id;
   $res = mysqli_query($con, $q);
   $fetch = mysqli_fetch_assoc($res);
@@ -186,54 +175,3 @@
      
   </body>
 </html>
-
-
-<!----------------------------------------------------------->
-<!---------------------ADD NEW PACKAGE FORM------------------>
-<!----------------------------------------------------------->
-<div class="add_new_package" 
-style="
-    display: none;
-    position: absolute; 
-    top: 0; 
-    left:0; 
-    background-color: rgba(0,0,0,.5); 
-    width: 100%; 
-    height:100%; 
-    z-index: 100;
-    align-content:center;
-">
-    <div style="width: 50%; margin:auto;">  
-        <div class="service h-100">
-            <div class="col-lg-6 section-title">
-                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Package Informations</span>
-            </div>
-
-            <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off">
-                <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="package_price" placeholder="Price" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <Br>
-                <br>
-                <span style="font-size:18px; color: rgb(0,123,255); font-weight:bold;">Destinations</span>
-                <input type="text" name="destination1" placeholder="Destination 1" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination2" placeholder="Destination 2" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination3" placeholder="Destination 3" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination4" placeholder="Destination 4" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination5" placeholder="Destination 5" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination6" placeholder="Destination 6" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination7" placeholder="Destination 7" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination8" placeholder="Destination 8" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination9" placeholder="Destination 9" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination10" placeholder="Destination 10" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination11" placeholder="Destination 11" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" name="destination12" placeholder="Destination 12" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <br> <br>
-                <input type="submit" value="Save" name="save"/> | <button onclick="$('.add_new_package').css('display', 'none');">Cancel</button>
-            </form>
-
-        </div>
-    </div>
-</div>
-<!----------------------------------------------------------->
-<!---------------------ADD NEW PACKAGE FORM------------------>
-<!----------------------------------------------------------->

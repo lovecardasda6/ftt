@@ -5,8 +5,8 @@
   $type= @$_GET['type'];
 
   if(isset($_POST['save'])){
-    $service_name = $_POST['service_name'];
-    $description = $_POST['description'];
+    $service_name = mysqli_real_escape_string($con, $_POST['service_name']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
     $image_name = $_FILES["image"]['name'];
     $image_tmp =$_FILES['image']['tmp_name'];
 
