@@ -428,6 +428,7 @@ style="
     z-index: 100;
     align-content:center;
 ">
+  <Br>
     <div style="width: 50%; margin:auto;">  
         <div class="service h-100">
             <div class="col-lg-6 section-title">
@@ -438,7 +439,7 @@ style="
                 <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
                 <Br>
                 <br>
-                <input type="submit" value="Save" name="save"/> | <button onclick="$('.add_new_package').css('display', 'none');">Cancel</button>
+                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveAddress"/> &nbsp; | &nbsp; <button class="btn btn-light" style="border-radius:0px;" onclick="$('.add_address').css('display', 'none');">Cancel</button>
             </form>
 
         </div>
@@ -460,6 +461,7 @@ style="
     z-index: 100;
     align-content:center;
 ">
+  <Br>
     <div style="width: 50%; margin:auto;">  
         <div class="service h-100">
             <div class="col-lg-6 section-title">
@@ -470,7 +472,7 @@ style="
                 <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
                 <Br>
                 <br>
-                <input type="submit" value="Save" name="save"/> | <button onclick="$('.add_new_package').css('display', 'none');">Cancel</button>
+                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveTelNumber"/> &nbsp; | &nbsp; <button class="btn btn-light" style="border-radius:0px;" onclick="$('.add_telephone').css('display', 'none');">Cancel</button>
             </form>
 
         </div>
@@ -492,6 +494,7 @@ style="
     z-index: 100;
     align-content:center;
 ">
+  <Br>
     <div style="width: 50%; margin:auto;">  
         <div class="service h-100">
             <div class="col-lg-6 section-title">
@@ -502,7 +505,7 @@ style="
                 <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
                 <Br>
                 <br>
-                <input type="submit" value="Save" name="save"/> | <button onclick="$('.add_new_package').css('display', 'none');">Cancel</button>
+                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveMobNumber"/> &nbsp; | &nbsp; <button class="btn btn-light" style="border-radius:0px;" onclick="$('.add_mobile').css('display', 'none');">Cancel</button>
             </form>
 
         </div>
@@ -524,6 +527,7 @@ style="
     z-index: 100;
     align-content:center;
 ">
+  <Br>
     <div style="width: 50%; margin:auto;">  
         <div class="service h-100">
             <div class="col-lg-6 section-title">
@@ -534,7 +538,7 @@ style="
                 <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
                 <Br>
                 <br>
-                <input type="submit" value="Save" name="save"/> | <button onclick="$('.add_new_package').css('display', 'none');">Cancel</button>
+                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveEmail"/> &nbsp; | &nbsp; <button class="btn btn-light" style="border-radius:0px;" onclick="$('.add_email').css('display', 'none');">Cancel</button>
             </form>
 
         </div>
