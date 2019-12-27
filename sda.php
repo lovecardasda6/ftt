@@ -161,27 +161,20 @@
       <div class="container">
 <!---------------------------------------------------------------------------------------------->
         <div class="row align-items-center">
-
           <div class="col-lg-6 mb-5">
+            
             <div class="owl-carousel slide-one-item hero-slider">
-
-              <?php
-                 $services_query = "SELECT image FROM services WHERE action != 'ARCHIVE' AND type='AIRLINES' ORDER BY name ASC";
-
-                if($result = mysqli_query($con, $services_query))
-                {
-                  while($row = mysqli_fetch_assoc($result ))
-                  {
-              ?>
-                <div class="slide overlay">
-                    <img src="./images/airlines/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">  
-                  </div>
-              <?php
-                  }
-                }
-              ?>
-
+              <div class="slide overlay">
+                <img src="images/AirAsia.png" alt="Image" class="img-fluid">  
+              </div>
+              <div class="slide overlay">
+                <img src="images/cebupacific.png" alt="Image" class="img-fluid">  
+              </div>
+              <div class="slide overlay">
+                <img src="images/Philippine-Airlines-Logo.jpg" alt="Image" class="img-fluid">  
+              </div>
             </div>
+            
           </div>
           <div class="col-lg-5 ml-auto section-title">
             <span class="sub-title mb-2 d-block">SERVICES</span>
@@ -220,7 +213,7 @@
             <div class="owl-carousel slide-one-item hero-slider">
 
               <?php
-                $service_images_query = "SELECT image FROM services WHERE action != 'ARCHIVE' AND type='Shippings' ORDER BY name ASC";
+                $service_images_query = "SELECT * FROM service_images WHERE type='Shippings' ORDER BY name ASC";
 
                 if($result = mysqli_query($con, $service_images_query))
                 {
@@ -228,13 +221,17 @@
                   {
               ?>
                 <div class="slide overlay">
-                    <img src="./images/shippings/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">  
+                    <a href=""><?php echo $row['image']; ?></a>
+                    <img src="images/cokaliong.jpg" alt="Image" class="img-fluid">  
                   </div>
               <?php
                   }
                 }
               ?>
-
+              <div class="slide overlay">
+                <img src="images/cokaliong.jpg" alt="Image" class="img-fluid">  
+              </div>
+              
             </div>
           </div>
           <!---------------------------------------------------------------------------------------------->
@@ -340,79 +337,237 @@
             <h2 class="title text-primary mb-3">Newly Added Tour Destinations</h2>
           </div>
         </div>
-        <?php
-          $tour_destinations_query = "SELECT * FROM tour_destinations WHERE action != 'ARCHIVE' ORDER BY destinations ASC";
-
-          if($result = mysqli_query($con, $tour_destinations_query))
-          {
-            $counter = 0;
-            while($row = mysqli_fetch_assoc($result ))
-            {
-              $counter++;
-              $tour_destination_id = $row['id'];
-        ?>
-        <?php 
-          if($counter == 1)
-          { 
-        ?>
         <div class="row mb-5">
           <div class="col-lg-6 mb-4 mb-lg-0">
-            <?php 
-              $tour_destination_image_query = "SELECT * FROM tour_destination_image WHERE tour_destination_id = ".$tour_destination_id;
-              if($res2 = mysqli_query($con, $tour_destination_image_query))
-              {
-                while($r2 = mysqli_fetch_assoc($res2)){
-            ?>
-            <img src="./images/tour_destinations/<?php echo $r2['image']; ?>" alt="Image" class="img-fluid" class="img-fluid">
-            <?php
-                }
-              }
-            ?>
+            <img src="images/12.png" alt="Image" class="img-fluid" class="img-fluid">
+            <img src="images/13.png" alt="Image" class="img-fluid" class="img-fluid">
           </div>
           <div class="col-lg-5 h-100 jm-sticky-top ml-auto">
-            <h3><?php echo $row['destinations']; ?></h3>
-            <p class="mb-4"><?php echo $row['description']; ?></p>
+            <h3>Bohol Water Bike Adventure</h3>
+            <p class="mb-4">
+              I. Water Bike Adventure Fun Ride - 1 hour downstream ride with guide and life vest within vicinity of the port. 8:00 am-5:30 pm operational time scale.
+              <br><br>
+              II. Water Bike Exercise Ride - Offered to all nearby residents. 1 hour exercise ride with guide and life vest within vicinity of the port. 5:30 am-7:30 am operational time scale.
+              <br><br>
+              III. Water Bike Adventure Tour - Port to Ugpong Foot Bridge route/ Port to Busai Falls respectively. 2 hours maximum tour with guide and life vest and minimum of 5 persons per tour. 8:00 am-5:00 pm operational time scale.
+              <br><br>
+              IV. Water Bike Firefly Watching Ride- Port to Canlasid, Loboc route. 3 hours maximum ride and minimum of 2 persons per tour. 7:00 pm-10:00 pm operational time.
+              <br><br>
+              V. Water Bike Night Adventure Ride- 1 hour ride with guide and life vest within vicinity of the port. 6:00 pm-9:30 pm operational time scale.</p>
+            <!-- <p class="mb-5"><strong class="text-black">Role:</strong> Design, Illustration, Web</p>
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi quod dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_1.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+            <p class="mb-4"><a href="#" class="readmore">Visit website</a></p> -->
           </div>
         </div>
-        <?php 
-          }
-        else{
-        ?>
-        
+<!---------------------------------------------------------------->
         <div class="row mb-5">
           <div class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
-            <?php 
-              $tour_destination_image_query = "SELECT * FROM tour_destination_image WHERE tour_destination_id = ".$tour_destination_id;
-              if($res2 = mysqli_query($con, $tour_destination_image_query))
-              {
-                while($r2 = mysqli_fetch_assoc($res2)){
-            ?>
-            <img src="./images/tour_destinations/<?php echo $r2['image']; ?>" alt="Image" class="img-fluid" class="img-fluid">
-            <?php
-                }
-              }
-            ?>
+            <img src="images/15.jpg" alt="Image" class="img-fluid" class="img-fluid">
+            <img src="images/16.jpg" alt="Image" class="img-fluid" class="img-fluid">
           </div>
           <div class="col-lg-5 h-100 jm-sticky-top mr-auto order-2 order-lg-1">
-            <h3><?php echo $row['destinations']; ?></h3>
-            <p class="mb-4"><?php echo $row['description']; ?></p>
+            <h3>Jardin Necitas</h3>
+            <p class="mb-4">At Jardin Necitas, there are LED roses and tulips that light up during nightfall, the stem is made out of a steel bar that the flowers stand on. The entrance is adorned with animals such as flamingos and swans, a perfect background for selfies. This place is perfect for anyone who’s into taking pictures and having it as a setup for prenups and events. Located on a hilltop in Barangay Bagumbayan, Jardin Necitas Pilar Glowing Garden has a colorful and romantic scenery.</p>
+            <!-- <p class="mb-5"><strong class="text-black">Role:</strong> Design, Illustration, Web</p>
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi quod
+                dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_2.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+            <p class="mb-4"><a href="#" class="readmore">Visit website</a></p> -->
+            
+            
           </div>
         </div>
 
-        <?php
-          $counter = 0;
-             }
-            }
-          }
-        ?>
-
+        <div class="row mb-5">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="images/24.jpg" alt="Image" class="img-fluid" class="img-fluid">
+            <img src="images/25.JPG" alt="Image" class="img-fluid" class="img-fluid">
+          </div>
+          <div class="col-lg-5 h-100 jm-sticky-top ml-auto">
+            <h3>Sagbayan Peak</h3>
+            <p class="mb-4">A Tourism Site overlooking a scenic valley with an observation platform and children's playground. A destination with whimsical animal sculptures, a small waterpark & swings, plus a cafe.
+              </p>
+            <!-- <p class="mb-5"><strong class="text-black">Role:</strong> Design, Illustration, Web</p>
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi
+                quod dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_1.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+            <p class="mb-4"><a href="#" class="readmore">Visit website</a></p> -->
+          </div>
         </div>
+
+        <div class="row mb-5">
+          <div class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
+            <img src="images/17.jpg" alt="Image" class="img-fluid" class="img-fluid">
+            <img src="images/18.png" alt="Image" class="img-fluid" class="img-fluid">
+          </div>
+          <div class="col-lg-5 h-100 jm-sticky-top mr-auto order-2 order-lg-1">
+            <h3>Bet N Choy Farms</h3>
+            <p class="mb-4">Bet 'n Choy Farms is an attraction / resort offering a wholesome destination and perfect place for family getaway and picnic. This resort has huge pools and water slides for adult and kids. It’s a perfect getaway for family to enjoy water, pool and sun. The farm is located in Catigbian, Bohol, about 900 meters from the Catigbian PNP Station and is about an hour trip from Tagbilaran City.</p>
+            <!-- <p class="mb-5"><strong class="text-black">Role:</strong> Design, Illustration, Web</p>
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi quod
+                dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_2.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+            <p class="mb-4"><a href="#" class="readmore">Visit website</a></p> -->
+            
+            
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="images/22.jpg" alt="Image" class="img-fluid" class="img-fluid">
+            <img src="images/23.jpg" alt="Image" class="img-fluid" class="img-fluid">
+          </div>
+          <div class="col-lg-5 h-100 jm-sticky-top ml-auto">
+            <h3>Cabagnow Cave Pool</h3>
+            <p class="mb-4"><b>Anda in Bohol</b> is famous for its long white sand beach but for the traveler, there are other options, like the beautiful and cool cave pools. These are refreshing alternatives to sun worshiping. Because of the soft nature of the rock, over time, the action of water and other geologic activities has led to the formations of caves across, not just in the municipality but in many parts of Bohol.
+              <br><br>
+              <b>Cabagnow Cave Pool</b> in Anda Bohol is famous for its long white sand beach but for the traveler, there are other options, like the beautiful and cool cave pools. These are refreshing alternatives to sun worshiping. Because of the soft nature of the rock, over time, the action of water and other geologic activities has led to the formations of caves across, not just in the municipality but in many parts of Bohol.
+            </p>
+            <!-- <p class="mb-5"><strong class="text-black">Role:</strong> Design, Illustration, Web</p>
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi
+                quod dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_1.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+            <p class="mb-4"><a href="#" class="readmore">Visit website</a></p> -->
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
+            <img src="images/18.jpg" alt="Image" class="img-fluid" class="img-fluid">
+            <img src="images/19.jpg" alt="Image" class="img-fluid" class="img-fluid">
+          </div>
+          <div class="col-lg-5 h-100 jm-sticky-top mr-auto order-2 order-lg-1">
+            <h3>Sea of Clouds</h3>
+            <p class="mb-4">Sea of Clouds in Anda Bohol is famous for its long white sand beach but for the traveler, there are other options, like the beautiful and cool cave pools. These are refreshing alternatives to sun worshiping. Because of the soft nature of the rock, over time, the action of water and other geologic activities has led to the formations of caves across, not just in the municipality but in many parts of Bohol.</p>
+            <!-- <p class="mb-5"><strong class="text-black">Role:</strong> Design, Illustration, Web</p>
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi quod
+                dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_2.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+            <p class="mb-4"><a href="#" class="readmore">Visit website</a></p>
+             -->
+            
+          </div>
+        </div>
+
+        <div class="row mb-5">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="images/20.jpg" alt="Image" class="img-fluid" class="img-fluid">
+            <img src="images/21.JPG" alt="Image" class="img-fluid" class="img-fluid">
+          </div>
+          <div class="col-lg-5 h-100 jm-sticky-top ml-auto">
+            <h3>Candijay Falls</h3>
+            <p class="mb-4">Caumantad Falls a 30 minute travel from the Poblacion of Candijay and you’re going to see this amazing and stunning water fall. You will be in awe in Mother Nature’s Beauty. A 60 feet high and is said to be the tallest waterfall in Bohol. It’s clean, clear and cold water will surely entice you to enjoy swimming.
+              <br> <br>
+                This site is suitable for picnics and other fun activities like river trekking and swimming with your loved ones. Have a free back massage with the splash of heavy flowing water. The experience is priceless if you visit and swim to this highest falls. Aside from the waterfalls; Candijay has still a lot more to offer.</p>
+            <!-- <p class="mb-5"><strong class="text-black">Role:</strong> Design, Illustration, Web</p>
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi
+                quod dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_1.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+            <p class="mb-4"><a href="#" class="readmore">Visit website</a></p> -->
+          </div>
+        </div>
+
+        
+
+
+          
+        </div>
+
       </div>
     </div>
 
 
 
 
+    <!-- <div class="site-section bg-light">
+      <div class="container">
+         <div class="row mb-5 ">
+          <div class="col-md-7 section-title text-center mx-auto">
+            <span class="sub-title mb-2 d-block">Testimonials</span>
+            <h2 class="title text-primary mb-3">Our Client Sayings</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi quod dolore commodi.</p>
+              <p  class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_1.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+          </div>
+          <div class="col-lg-6 mb-4">
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi quod dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_2.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+          </div>
+          
+          <div class="col-lg-6 mb-4">
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi quod
+                dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_1.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+          </div>
+          <div class="col-lg-6 mb-4">
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi quod
+                dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="images/person_2.jpg" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+          </div>
+          
+        </div>
+      </div>
+    </div> -->
 
 
 
@@ -430,6 +585,7 @@
             <div class="row">
               <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                 <div class="service h-100 align-items-center" style="text-align: center;">
+                  <!-- <span class="icon-map-marker display-4 text-primary d-block mb-4"></span> -->
                   <img src="./images/fiesta bolanon.png" 
                   style="width: 150px; height: 150px; margin: 0px 0px 25px 0px;">
                   <h3>Fiesta Bolanon Cuisine</h3>
@@ -441,6 +597,9 @@
 			  
               <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                 <div class="service h-100 align-items-center" style="text-align: center;">
+                  <!-- <span class="icon-map-marker display-4 text-primary d-block mb-4"></span> -->
+                  <!-- <img src="./images/fiesta bolanon.png" 
+                  style="width: 150px; height: 150px; margin: 0px 0px 25px 0px;"> -->
                   <h3>GTL Car Rental</h3>
                   <li>A delicious Eat All You Can Restaurant for affordable price.</li>
                   <br>
@@ -450,6 +609,9 @@
 
               <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                 <div class="service h-100 align-items-center" style="text-align: center;">
+                  <!-- <span class="icon-map-marker display-4 text-primary d-block mb-4"></span> -->
+                  <!-- <img src="./images/fiesta bolanon.png" 
+                  style="width: 150px; height: 150px; margin: 0px 0px 25px 0px;"> -->
                   <h3>GTL Driving School</h3>
                   <li>A delicious Eat All You Can Restaurant for affordable price.</li>
                   <br>
@@ -459,6 +621,9 @@
 
               <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                 <div class="service h-100 align-items-center" style="text-align: center;">
+                  <!-- <span class="icon-map-marker display-4 text-primary d-block mb-4"></span> -->
+                  <!-- <img src="./images/fiesta bolanon.png" 
+                  style="width: 150px; height: 150px; margin: 0px 0px 25px 0px;"> -->
                   <h3>Fely's Pension House</h3>
                   <li>A delicious Eat All You Can Restaurant for affordable price.</li>
                   <br>
@@ -468,6 +633,9 @@
 
               <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                 <div class="service h-100 align-items-center" style="text-align: center;">
+                  <!-- <span class="icon-map-marker display-4 text-primary d-block mb-4"></span> -->
+                  <!-- <img src="./images/fiesta bolanon.png" 
+                  style="width: 150px; height: 150px; margin: 0px 0px 25px 0px;"> -->
                   <h3>Jojo's Tracking and Septic Tank Services</h3>
                   <li>A delicious Eat All You Can Restaurant for affordable price.</li>
                   <br>
@@ -485,7 +653,38 @@
 
 
 
+`<!--
+    <div class="site-section" id="contact-section">
+      <div class="container"></div>
 
+          <div class="section-title text-center mb-5">
+            <span class="sub-title mb-2 d-block">Promotional</span>
+            <h1 class="title text-primary" style="font-size: 52px;">IT'S MORE FUN IN BOHOL with FELY's TOURS & TRAVEL</h1>
+            
+            
+
+
+
+            <div class="img-wrap">
+              <div class="owl-carousel slide-one-item hero-slider">
+                <div class="slide overlay">
+                  <video width="80%" controls>
+                    <source src="video/1.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <div class="slide overlay">
+                  <video width="80%" controls>
+                    <source src="video/2.mp4" type="video/ogg">
+                  </video>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          
+      </div>
+    </div> <!-- END .site-section -->
 
   
 
@@ -541,7 +740,32 @@
                     <h3><span class="icon-facebook"></span> <a href="https://www.facebook.com/Felys-Tours-and-Travel-365299680961433/?modal=admin_todo_tour">Facebook</a> </h3>
                 </div>
 
+          <!-- <div class="row mb-4">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <input type="text" class="form-control" placeholder="First name">
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Last name">
+            </div>
+          </div>
 
+          <div class="row mb-4">
+            <div class="col-12">
+              <input type="text" class="form-control" placeholder="Email">
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-12">
+              <textarea class="form-control" name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-md">Send Message</button>
+            </div>
+          </div> -->
 
         </form>
       </div>

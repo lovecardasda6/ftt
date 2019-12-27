@@ -40,7 +40,7 @@
                         <div class="col-10 col-md-10" style="padding:0px; margin:0px;">
 							<h1 class="my-0 site-logo">
 								<img src="./images/img.png"style=" width: 62px;height: 62px;"/>
-								<a href="./../index.html">Fely's Tours & Travel<span class="text-primary">.</span> </a>
+								<a href="./../index.php">Fely's Tours & Travel<span class="text-primary">.</span> </a>
 							</h1>
                         </div>
                     </div>
@@ -50,6 +50,8 @@
 
         <div class="container">
 			 <div class="row align-items-center" style="border:1px solid; justify-content:center;">
+        
+        <br>
 				 <div class="col-lg-4 mb-5" style="border:1px solid; padding: 25px;">
 					<input type="text" placeholder="Username" style="margin: 5px 0px; padding-left: 5px; width: 250px;"/>
 					<br>
