@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2019 at 04:33 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: Dec 27, 2019 at 04:54 AM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,6 +25,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `address`
+--
+
+CREATE TABLE `address` (
+  `id` int(11) NOT NULL,
+  `address` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`id`, `address`) VALUES
+(1, '16 J.A. Clarin Street Tagbilaran City near Florencio\'s Caltex Station');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `albums`
 --
 
@@ -34,6 +52,46 @@ CREATE TABLE `albums` (
   `title` varchar(250) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_address`
+--
+
+CREATE TABLE `email_address` (
+  `id` int(11) NOT NULL,
+  `email_address` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `email_address`
+--
+
+INSERT INTO `email_address` (`id`, `email_address`) VALUES
+(1, 'elystoursandtravel@yahoo.com'),
+(2, 'ftt_bookings@yahoo.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mobile_number`
+--
+
+CREATE TABLE `mobile_number` (
+  `id` int(11) NOT NULL,
+  `mobile_number` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mobile_number`
+--
+
+INSERT INTO `mobile_number` (`id`, `mobile_number`) VALUES
+(1, '0916-359-6126'),
+(2, '0915-829-5095'),
+(3, '0922-300-1458'),
+(4, '0939-904-5521');
 
 -- --------------------------------------------------------
 
@@ -114,6 +172,26 @@ INSERT INTO `services` (`id`, `type`, `name`, `description`, `image`, `action`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `telephone_number`
+--
+
+CREATE TABLE `telephone_number` (
+  `id` int(11) NOT NULL,
+  `tel_number` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `telephone_number`
+--
+
+INSERT INTO `telephone_number` (`id`, `tel_number`) VALUES
+(1, '(038) 411-4476'),
+(2, '(038) 416-1198'),
+(3, '(038) 510-1652');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tour_destinations`
 --
 
@@ -132,7 +210,7 @@ INSERT INTO `tour_destinations` (`id`, `destinations`, `description`, `action`) 
 (1, 'Bohol Water Bike Adventure', 'I. Water Bike Adventure Fun Ride - 1 hour downstream ride with guide and life vest within vicinity of the port. 8:00 am-5:30 pm operational time scale.\r\n\r\nII. Water Bike Exercise Ride - Offered to all nearby residents. 1 hour exercise ride with guide and life vest within vicinity of the port. 5:30 am-7:30 am operational time scale.\r\n\r\nIII. Water Bike Adventure Tour - Port to Ugpong Foot Bridge route/ Port to Busai Falls respectively. 2 hours maximum tour with guide and life vest and minimum of 5 persons per tour. 8:00 am-5:00 pm operational time scale.\r\n\r\nIV. Water Bike Firefly Watching Ride- Port to Canlasid, Loboc route. 3 hours maximum ride and minimum of 2 persons per tour. 7:00 pm-10:00 pm operational time.\r\n\r\nV. Water Bike Night Adventure Ride- 1 hour ride with guide and life vest within vicinity of the port. 6:00 pm-9:30 pm operational time scale.', 'ACTIVE'),
 (2, 'Jardin Necitas', 'At Jardin Necitas, there are LED roses and tulips that light up during nightfall, the stem is made out of a steel bar that the flowers stand on. The entrance is adorned with animals such as flamingos and swans, a perfect background for selfies. This place is perfect for anyone who\'s into taking pictures and having it as a setup for prenups and events. Located on a hilltop in Barangay Bagumbayan, Jardin Necitas Pilar Glowing Garden has a colorful and romantic scenery.', ''),
 (3, 'Sagbayan Peak', 'A Tourism Site overlooking a scenic valley with an observation platform and children\'s playground. A destination with whimsical animal sculptures, a small waterpark & swings, plus a cafe.', 'ACTIVE'),
-(4, 'Bet N Choy Farms', 'Bet\'n Choy Farms is an attraction / resort offering a wholesome destination and perfect place for family getaway and picnic. This resort has huge pools and water slides for adult and kids. It\'s a perfect getaway for family to enjoy water, pool and sun. The farm is located in Catigbian, Bohol, about 900 meters from the Catigbian PNP Station and is about an hour trip from Tagbilaran City.', 'ARCHIVE'),
+(4, 'Bet N Choy Farms', 'Bet\'n Choy Farms is an attraction / resort offering a wholesome destination and perfect place for family getaway and picnic. This resort has huge pools and water slides for adult and kids. It\'s a perfect getaway for family to enjoy water, pool and sun. The farm is located in Catigbian, Bohol, about 900 meters from the Catigbian PNP Station and is about an hour trip from Tagbilaran City.', 'ACTIVE'),
 (5, 'Cabagnow Cave Pool', 'Anda in Bohol is famous for its long white sand beach but for the traveler, there are other options, like the beautiful and cool cave pools. These are refreshing alternatives to sun worshiping. Because of the soft nature of the rock, over time, the action of water and other geologic activities has led to the formations of caves across, not just in the municipality but in many parts of Bohol.\r\n\r\nCabagnow Cave Pool in Anda Bohol is famous for its long white sand beach but for the traveler, there are other options, like the beautiful and cool cave pools. These are refreshing alternatives to sun worshiping. Because of the soft nature of the rock, over time, the action of water and other geologic activities has led to the formations of caves across, not just in the municipality but in many parts of Bohol.', ''),
 (6, 'Sea of Clouds', 'Sea of Clouds in Anda Bohol is famous for its long white sand beach but for the traveler, there are other options, like the beautiful and cool cave pools. These are refreshing alternatives to sun worshiping. Because of the soft nature of the rock, over time, the action of water and other geologic activities has led to the formations of caves across, not just in the municipality but in many parts of Bohol.', ''),
 (7, 'Candijay Falls', 'Caumantad Falls a 30 minute travel from the Poblacion of Candijay and you\'re going to see this amazing and stunning water fall. You will be in awe in Mother Nature\'s Beauty. A 60 feet high and is said to be the tallest waterfall in Bohol. It\'s clean, clear and cold water will surely entice you to enjoy swimming.\r\n\r\nThis site is suitable for picnics and other fun activities like river trekking and swimming with your loved ones. Have a free back massage with the splash of heavy flowing water. The experience is priceless if you visit and swim to this highest falls. Aside from the waterfalls; Candijay has still a lot more to offer.', '');
@@ -224,9 +302,27 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `address`
+--
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `albums`
 --
 ALTER TABLE `albums`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `email_address`
+--
+ALTER TABLE `email_address`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mobile_number`
+--
+ALTER TABLE `mobile_number`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -247,6 +343,12 @@ ALTER TABLE `photos`
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `telephone_number`
+--
+ALTER TABLE `telephone_number`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -285,10 +387,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `address`
+--
+ALTER TABLE `address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `albums`
 --
 ALTER TABLE `albums`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `email_address`
+--
+ALTER TABLE `email_address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `mobile_number`
+--
+ALTER TABLE `mobile_number`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `package_destinations`
@@ -309,16 +429,22 @@ ALTER TABLE `services`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `telephone_number`
+--
+ALTER TABLE `telephone_number`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tour_destinations`
 --
 ALTER TABLE `tour_destinations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tour_destination_image`
 --
 ALTER TABLE `tour_destination_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tour_packages`
