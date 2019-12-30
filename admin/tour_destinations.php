@@ -1,6 +1,8 @@
 
 <?php
-  $con = @mysqli_connect("localhost","root","","ftt");
+  require_once __DIR__."/require_files/config.php";
+  require_once __DIR__."/require_files/auth.php";
+  
   $id = @$_GET['id'];
   $action = @$_GET['action'];
 
@@ -71,9 +73,6 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     
-    <link rel="stylesheet" href="./gallery_assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="./gallery_assets/css/jquery-ui.css">
-    
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
   
     <link rel="stylesheet" href="css/aos.css">
@@ -117,14 +116,8 @@
                             </div>
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                              <li><a href="index.php#update" class="nav-link">Update</a></li>
-                              <li><a href="services.php" class="nav-link">Services</a></li>
-                              <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
-                              <li><a href="tour_destinations.php" class="nav-link">New Destinations</a></li>
-                              <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
-                              <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
-                            </ul>
+                                <?php include_once __DIR__."/require_files/navigations.php"; ?>
+                              </ul>
                             </div>
                         </nav>
                         </div>
@@ -279,12 +272,6 @@
   
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/main.js"></script>
-
-  <script src="./gallery_assets/js/jquery-ui.js"></script>
-  <script src="./gallery_assets/js/jquery.stellar.min.js"></script>
-  <script src="./gallery_assets/js/jquery.countdown.min.js"></script>
-  <script src="./gallery_assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="./gallery_assets/js/bootstrap-datepicker.min.js"></script>
      
   </body>
 </html>
@@ -327,7 +314,9 @@ style="
                 <label>Destination Description</label>
                 <textarea name="description" style="width: 100%; height: 300px; font-size: 18px; margin-bottom:5px;"> </textarea>
                 <br>
-                <input type="submit" value="Save" name="save" class="btn btn-primary"/> | <button onclick="$('.add_new_package').css('display', 'none');" class="btn btn-light">Cancel</button>
+                <input type="submit" style="border-radius:0px;" value="Save" name="save" class="btn btn-primary"/> 
+                &nbsp; | &nbsp;  
+                <button type="button" style="border-radius:0px;" onclick="$('.add_new_destinations').css('display', 'none');" class="btn btn-light">Cancel</button>
             </form>
 
         </div>

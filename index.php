@@ -1,5 +1,6 @@
 <?php
-  $con = @mysqli_connect("localhost","root","","ftt");
+  require_once __DIR__."/required_files/config.php";
+  
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +49,20 @@
           <div class="row align-items-center">
             <div class="col-10 col-md-10" style="padding:0px; margin:0px;">
               <h1 class="my-0 site-logo">
-                <img src="./images/img.png"style=" width: 62px;height: 62px;"/>
+                
+                <?php 
+                  $res = mysqli_query($con, "SELECT * FROM images WHERE `type` = 'logo'");
+                  if($res)
+                  {
+                    while($row = mysqli_fetch_assoc($res))
+                    {
+                ?>
+                  <img src="./images/<?php echo $row['image']; ?>"style=" width: 62px;height: 62px;"/> 
+                <?php
+                    }
+                  }
+                ?>
+                
                 <a href="index.php">Fely's Tours & Travel<span class="text-primary">.</span> </a>
               </h1>
             </div>
@@ -63,19 +77,9 @@
                   </div>
 
                   <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                    <li><a href="#home-section" class="nav-link">Home</a></li>
-                    <li><a href="#update" class="nav-link">Update</a></li>
-                    <!-- <li><a href="#about-us-section" class="nav-link">About Us</a></li> -->
-                    
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    
-                    <li><a href="#what-we-do-section" class="nav-link">Tour Package</a></li>
-                    <!-- <li><a href="#what-we-do-section" class="nav-link">What We Do</a></li> -->
-                    <li><a href="#portfolio-section" class="nav-link">New Destinations</a></li>
-                    <!-- <li><a href="#portfolio-section" class="nav-link">Portfolio</a></li> -->
-                    <li><a href="photos.php" class="nav-link">Photos</a></li>
-                    <li><a href="#contact-section" class="nav-link">Contact</a></li>
-                    <li><a href="#other-services-offered" class="nav-link">Other Services Offered</a></li>
+                    <?php
+                      require_once __DIR__."/required_files/home_navigations.php";
+                    ?>
                   </ul>
                 </div>
               </nav>
@@ -88,15 +92,23 @@
     <div class="site-blocks-cover" id="home-section" style="opacity: 100%;">
       <div class="img-wrap">
         <div class="owl-carousel slide-one-item hero-slider">
+
+          <?php 
+            $q = "SELECT * FROM images WHERE `type` = 'slide'";
+            $res = mysqli_query($con, $q);
+            if($res)
+            {
+              while($row = mysqli_fetch_assoc($res))
+              {
+          ?>
           <div class="slide overlay">
-            <img src="images/1.png" alt="Image" class="img-fluid">  
+            <img src="images/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">  
           </div>
-          <div class="slide overlay">
-            <img src="images/2.png" alt="Image" class="img-fluid">  
-          </div>
-          <div class="slide overlay">
-            <img src="images/3.png" alt="Image" class="img-fluid">  
-          </div>
+          <?php
+              }
+            }
+          ?>
+
         </div>
       </div>
       <div class="container">
@@ -122,39 +134,52 @@
      <div class="site-section" id="update">
         <div class="container">
 
-          <div class="row align-items-center">
-            <div class="col-lg-6 mb-5">
-              <img src="images/ML.jpg" alt="Image" class="img-fluid" class="img-fluid">
-            </div>
-            <div class="col-lg-5 ml-auto section-title">
-              <span class="sub-title mb-2 d-block">Latest Update</span>
-              <h2 class="title text-primary mb-3">New Payment Method</h2>
-              <p class="mb-4">We now accept payment through MLHUILLIER, just go to your nearest MLHUILLIER outlet and say payment for "FELY'S TOURS AND TRAVEL".</p>
-              <!-- <p><a data-fancybox data-ratio="2" href="https://vimeo.com/326176805" class="d-flex align-items-center"><span class="icon-play_circle_outline h4 m-0 mr-2"></span> <span>Watch the video</span></a></p> -->
+          <div class="row mb-5">
+            <div class="col-lg-6 section-title">
+              <span class="sub-title mb-2 d-block">Latest Updates</span>
             </div>
           </div>
 
+          <?php
+                $tour_package_query = "SELECT * FROM updates WHERE action != 'ARCHIVE' ORDER BY id DESC LIMIT 0,2";
+
+                if($result = mysqli_query($con, $tour_package_query))
+                {
+                  while($row = mysqli_fetch_assoc($result )){
+
+              ?>
+                  <!---------------------------------->
+                  <div class="row">
+                    <div class="col-lg-4 mb-4">
+                      <img src="./../images/updates/<?php echo $row['image']; ?>" alt="Image" class="img-fluid" class="img-fluid">
+                    </div>
+                    <div class="col-lg-8 ml-auto section-title">
+                    
+                      <h2 class="title text-primary mb-3" style="line-height: 15px;"><?php echo $row['header']; ?></h2>
+                      <label style="margin-top: -65px;">Posted : <?php echo $row['posted']; ?></label>
+                      <br><br>
+                      <p class="mb-4"><?php echo $row['description']; ?></p>
+                      
+                    </div>
+                  </div>
+                  <hr>
+                  <!---------------------------------->
+              <?php
+                  }
+                }
+              ?>
+
+          <hr>
+          <div style="text-align:center;">
+            <a href="read_more_update.php?page=1"><span style="font-size:18px; font-weight:bold;">More update</span></a>
+          </div>
         </div>
       </div> <!-- .END site-section -->
-      <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-        <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-        <!-- <div class="site-section" id="about-us-section">
-          <div class="container">
-            <div class="row align-items-center">
-              <div class="col-lg-6 mb-5">
-                <img src="images/img.png" alt="Image" class="img-fluid" class="img-fluid">
-              </div>
-              <div class="col-lg-5 ml-auto section-title">
-                <span class="sub-title mb-2 d-block">ABOUT US</span>
-                <h2 class="title text-primary mb-3">Fely's Tours and Travel Agency</h2>
-                <p class="mb-4">A DOT accredited travel and tours agency based in the "City of Friendship", Tagbilaran City, Bohol. The agency started operation last 2013 initially offering transport services under GTL Transport, both sister companies under GTL Group of Companies. With our very own line of transport buses, vans, cars and limo service we are committed to deliver cost-friendly, efficient, personalized service and customer satisfaction to our valued clients particularly those traveling to Bohol.</p>
-                <p><a data-fancybox data-ratio="2" href="https://vimeo.com/326176805" class="d-flex align-items-center"><span class="icon-play_circle_outline h4 m-0 mr-2"></span> <span>Watch the video</span></a></p>
-              </div>
-            </div>
-          </div>
-        </div>  -->
-        <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+
 
 
     <div class="site-section" id="services">
@@ -428,53 +453,31 @@
 		  <div class="row">
           <div class="col-lg-12 ml-auto">
             <div class="row">
+
+              <?php
+                $q = "SELECT * FROM `other_services` WHERE `action` != 'ARCHIVE'";
+                if($res = mysqli_query($con, $q))
+                {
+                  while($row = mysqli_fetch_assoc($res))
+                  {
+              ?>
+              <!------>
               <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                 <div class="service h-100 align-items-center" style="text-align: center;">
-                  <img src="./images/fiesta bolanon.png" 
+                  <img src="./images/other_services/<?php echo $row['image'] ?>" 
                   style="width: 150px; height: 150px; margin: 0px 0px 25px 0px;">
-                  <h3>Fiesta Bolanon Cuisine</h3>
-                  <li>A delicious Eat All You Can Restaurant for affordable price.</li>
+                  <h3><?php echo $row['service_name'] ?></h3>
+                  <li><?php echo $row['description'] ?></li>
                   <br>
-                  <p><a href="#" class="readmore">Learn more</a></p>
+                  <p><a href="other_services.php?id=<?php echo $row['id']; ?>" class="readmore">Learn more</a></p>
                 </div>
               </div>
-			  
-              <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                <div class="service h-100 align-items-center" style="text-align: center;">
-                  <h3>GTL Car Rental</h3>
-                  <li>A delicious Eat All You Can Restaurant for affordable price.</li>
-                  <br>
-                  <p><a href="#" class="readmore">Learn more</a></p>
-                </div>
-              </div>
+              <!------>
+              <?php
+                  }
+                }
+              ?>
 
-              <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                <div class="service h-100 align-items-center" style="text-align: center;">
-                  <h3>GTL Driving School</h3>
-                  <li>A delicious Eat All You Can Restaurant for affordable price.</li>
-                  <br>
-                  <p><a href="#" class="readmore">Learn more</a></p>
-                </div>
-              </div>
-
-              <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                <div class="service h-100 align-items-center" style="text-align: center;">
-                  <h3>Fely's Pension House</h3>
-                  <li>A delicious Eat All You Can Restaurant for affordable price.</li>
-                  <br>
-                  <p><a href="#" class="readmore">Learn more</a></p>
-                </div>
-              </div>
-
-              <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                <div class="service h-100 align-items-center" style="text-align: center;">
-                  <h3>Jojo's Tracking and Septic Tank Services</h3>
-                  <li>A delicious Eat All You Can Restaurant for affordable price.</li>
-                  <br>
-                  <p><a href="#" class="readmore">Learn more</a></p>
-                </div>
-              </div>
-			  
             </div>
           </div>
         </div>
@@ -537,6 +540,8 @@
                       $q = "SELECT * FROM telephone_number WHERE `action` != 'ARCHIVE' ORDER BY tel_number ASC";
                       if($exec = mysqli_query($con, $q))
                       {
+                    ?>
+                    <?php
                         while($row = mysqli_fetch_assoc($exec))
                         {
                     ?>

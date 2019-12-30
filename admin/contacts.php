@@ -1,6 +1,8 @@
 
 <?php
-  $con = @mysqli_connect("localhost","root","","ftt");
+  require_once __DIR__."/require_files/config.php";
+  require_once __DIR__."/require_files/auth.php";
+  
   $id = @$_GET['id'];
   $action = @$_GET['action'];
   $contact = @$_GET['contact'];
@@ -51,21 +53,41 @@
   if(isset($_POST['saveAddress']))
   {
     $address = mysqli_real_escape_string($con, $_POST['address']);
+    $q = "INSERT INTO address SET `address` = '".$address."'";
+    $exec = mysqli_query($con, $q);
+    if($exec){
+      echo "<script>alert('Address successfully added.')</script>";
+    }
 
   }
   else if(isset($_POST['saveTelNumber']))
   {
     $telephone_number = mysqli_real_escape_string($con, $_POST['telephone_number']);
+    $q = "INSERT INTO telephone_number SET `tel_number` = '".$telephone_number."'";
+    $exec = mysqli_query($con, $q);
+    if($exec){
+      echo "<script>alert('Telephone Number successfully added.')</script>";
+    }
 
   }
   else if(isset($_POST['saveMobNumber']))
   {
     $mobile_number = mysqli_real_escape_string($con, $_POST['mobile_number']);
+    $q = "INSERT INTO mobile_number SET `mobile_number` = '".$mobile_number."'";
+    $exec = mysqli_query($con, $q);
+    if($exec){
+      echo "<script>alert('Mobile Number successfully added.')</script>";
+    }
 
   }
   else if(isset($_POST['saveEmail']))
   {
     $email_address = mysqli_real_escape_string($con, $_POST['email_address']);
+    $q = "INSERT INTO email_address SET `email_address` = '".$email_address."'";
+    $exec = mysqli_query($con, $q);
+    if($exec){
+      echo "<script>alert('Email address successfully added.')</script>";
+    }
 
   }
 ?>
@@ -84,9 +106,6 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    
-    <link rel="stylesheet" href="./gallery_assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="./gallery_assets/css/jquery-ui.css">
     
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
   
@@ -124,21 +143,16 @@
                         <nav class="site-navigation text-right" role="navigation">
                             <div class="container">
 
-                            <div class="d-inline-block d-lg-block ml-md-0 mr-auto py-3">
-                                <a href="#" class="site-menu-toggle js-menu-toggle text-black">
-                                <span class="icon-menu h3"></span> <span class="menu-text"></span>
-                                </a>
-                            </div>
+                              <div class="d-inline-block d-lg-block ml-md-0 mr-auto py-3">
+                                  <a href="#" class="site-menu-toggle js-menu-toggle text-black">
+                                  <span class="icon-menu h3"></span> <span class="menu-text"></span>
+                                  </a>
+                              </div>
 
-                            <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                              <li><a href="index.php#update" class="nav-link">Update</a></li>
-                              <li><a href="services.php" class="nav-link">Services</a></li>
-                              <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
-                              <li><a href="tour_destinations.php" class="nav-link">New Destinations</a></li>
-                              <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
-                              <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
-                            </ul>
+                              <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
+                                <?php include_once __DIR__."/require_files/navigations.php"; ?>
+                              </ul>
+                              
                             </div>
                         </nav>
                         </div>
@@ -197,7 +211,7 @@
               <td><?php echo $row['action'] != 'ARCHIVE'? 'Active' : 'Archived'; ?></td>
               <td>
                 <span class="sub-title mb-2 d-block">
-                  <a target="_blank" href="tour_destinations_modify.php?id=<?php echo $row['id']; ?>">
+                  <a href="?modify=address&id=<?php echo $row['id']; ?>&contact=<?php echo $row['address']; ?>">
                     <span class="icon-edit" style="font-size: 24px;"></span>
                   </a> 
                   &nbsp; | &nbsp;
@@ -216,7 +230,7 @@
         <!-- .END table -->
       </div>
       <!-- END container -->
-      <br><br><br><br><br>
+      <br>
       <!-- .START container -->
       <div class="container">
         <div class="row mb-5">
@@ -253,7 +267,7 @@
               <td><?php echo $row['action'] != 'ARCHIVE'? 'Active' : 'Archived'; ?></td>
               <td>
                 <span class="sub-title mb-2 d-block">
-                  <a target="_blank" href="tour_destinations_modify.php?id=<?php echo $row['id']; ?>">
+                  <a href="?modify=telephone&id=<?php echo $row['id']; ?>&contact=<?php echo $row['tel_number']; ?>">
                     <span class="icon-edit" style="font-size: 24px;"></span>
                   </a> 
                   &nbsp; | &nbsp;
@@ -272,7 +286,7 @@
         <!-- .END table -->
       </div>
       <!-- END container -->
-      <br><br><br><br><br>
+      <br><
       <!-- .START container -->
       <div class="container">
         <div class="row mb-5">
@@ -309,7 +323,7 @@
               <td><?php echo $row['action'] != 'ARCHIVE'? 'Active' : 'Archived'; ?></td>
               <td>
                 <span class="sub-title mb-2 d-block">
-                  <a target="_blank" href="tour_destinations_modify.php?id=<?php echo $row['id']; ?>">
+                  <a href="?modify=mobile&id=<?php echo $row['id']; ?>&contact=<?php echo $row['mobile_number']; ?>">
                     <span class="icon-edit" style="font-size: 24px;"></span>
                   </a> 
                   &nbsp; | &nbsp;
@@ -328,7 +342,7 @@
         <!-- .END table -->
       </div>
       <!-- END container -->
-      <br><br><br><br><br>
+      <br>
       <!-- .START container -->
       <div class="container">
         <div class="row mb-5">
@@ -365,7 +379,7 @@
               <td><?php echo $row['action'] != 'ARCHIVE'? 'Active' : 'Archived'; ?></td>
               <td>
                 <span class="sub-title mb-2 d-block">
-                  <a target="_blank" href="tour_destinations_modify.php?id=<?php echo $row['id']; ?>">
+                <a href="?modify=email&id=<?php echo $row['id']; ?>&contact=<?php echo $row['email_address']; ?>">
                     <span class="icon-edit" style="font-size: 24px;"></span>
                   </a> 
                   &nbsp; | &nbsp;
@@ -389,7 +403,7 @@
 <!---------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------->
         
-    </div>
+  </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/popper.min.js"></script>
@@ -402,19 +416,12 @@
   
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/main.js"></script>
-
-  <script src="./gallery_assets/js/jquery-ui.js"></script>
-  <script src="./gallery_assets/js/jquery.stellar.min.js"></script>
-  <script src="./gallery_assets/js/jquery.countdown.min.js"></script>
-  <script src="./gallery_assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="./gallery_assets/js/bootstrap-datepicker.min.js"></script>
-     
   </body>
 </html>
 
 
 <!----------------------------------------------------------->
-<!---------------------ADD ADDRESS------------------>
+<!--------------------------ADD ADDRESS---------------------->
 <!----------------------------------------------------------->
 <div class="add_address" 
 style="
@@ -436,10 +443,12 @@ style="
             </div>
 
             <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off">
-                <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
+                <input type="text" name="address" placeholder="Address" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
                 <Br>
                 <br>
-                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveAddress"/> &nbsp; | &nbsp; <button class="btn btn-light" style="border-radius:0px;" onclick="$('.add_address').css('display', 'none');">Cancel</button>
+                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveAddress"/> 
+                &nbsp; | &nbsp; 
+                <button type="button" class="btn btn-light" style="border-radius:0px;" onclick="$('.add_address').css('display', 'none');">Cancel</button>
             </form>
 
         </div>
@@ -469,10 +478,12 @@ style="
             </div>
 
             <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off">
-                <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
+                <input type="text" name="telephone_number" placeholder="Telephone Number" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
                 <Br>
                 <br>
-                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveTelNumber"/> &nbsp; | &nbsp; <button class="btn btn-light" style="border-radius:0px;" onclick="$('.add_telephone').css('display', 'none');">Cancel</button>
+                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveTelNumber"/> 
+                &nbsp; | &nbsp; 
+                <button type="button" class="btn btn-light" style="border-radius:0px;" onclick="$('.add_telephone').css('display', 'none');">Cancel</button>
             </form>
 
         </div>
@@ -480,7 +491,7 @@ style="
 </div>
 
 <!----------------------------------------------------------->
-<!---------------------ADD MOBILE NUMBER------------------>
+<!----------------------ADD MOBILE NUMBER-------------------->
 <!----------------------------------------------------------->
 <div class="add_mobile" 
 style="
@@ -502,10 +513,12 @@ style="
             </div>
 
             <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off">
-                <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
+                <input type="text" name="mobile_number" placeholder="Mobile Number" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
                 <Br>
                 <br>
-                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveMobNumber"/> &nbsp; | &nbsp; <button class="btn btn-light" style="border-radius:0px;" onclick="$('.add_mobile').css('display', 'none');">Cancel</button>
+                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveMobNumber"/> 
+                &nbsp; | &nbsp; 
+                <button type="button" class="btn btn-light" style="border-radius:0px;" onclick="$('.add_mobile').css('display', 'none');">Cancel</button>
             </form>
 
         </div>
@@ -513,7 +526,7 @@ style="
 </div>
 
 <!----------------------------------------------------------->
-<!---------------------ADD EMAIL ADDRESS------------------>
+<!---------------------ADD EMAIL ADDRESS--------------------->
 <!----------------------------------------------------------->
 <div class="add_email" 
 style="
@@ -535,12 +548,205 @@ style="
             </div>
 
             <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off">
-                <input type="text" name="package_name" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
+                <input type="text" name="email_address" placeholder="Email Address" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
                 <Br>
                 <br>
-                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveEmail"/> &nbsp; | &nbsp; <button class="btn btn-light" style="border-radius:0px;" onclick="$('.add_email').css('display', 'none');">Cancel</button>
+                <input type="submit" value="Save" class="btn btn-primary" style="border-radius:0px;" name="saveEmail"/> 
+                &nbsp; | &nbsp; 
+                <button type="button" class="btn btn-light" style="border-radius:0px;" onclick="$('.add_email').css('display', 'none');">Cancel</button>
             </form>
 
         </div>
     </div>
 </div>
+
+<!----------------------------------------------------------------------------------------->
+<!----------------------------------------------------------->
+<!-------------------------EDIT ADDRESS---------------------->
+<!----------------------------------------------------------->
+<?php
+  $modify = @$_GET['modify'];
+  $id = @$_GET['id'];
+  $contact = @$_GET['contact'];
+
+  if($modify != NULL && $modify == "address" && $id != null && $contact != null)
+  {
+?>
+<div class="update_address" 
+style="
+    position: absolute; 
+    top: 0; 
+    left:0; 
+    background-color: rgba(0,0,0,.5); 
+    width: 100%; 
+    height:100%; 
+    z-index: 100;
+    align-content:center;
+">
+  <Br>
+    <div style="width: 50%; margin:auto;">  
+        <div class="service h-100">
+            <div class="col-lg-6 section-title">
+                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Address</span>
+            </div>
+
+            <form style="padding: 10px; margin-top:8px;" method="POST" action="update_contacts.php" autocomplete="off">
+                <input type="hidden" value="<?php echo $id; ?>" name="id"/>
+                <input type="text" value="<?php echo $contact; ?>" name="contact" placeholder="Address" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
+                <Br>
+                <br>
+                <input type="submit" value="Update" class="btn btn-primary" style="border-radius:0px;" name="updateAddress"/> 
+                &nbsp; | &nbsp; 
+                <button class="btn btn-light" type="button" style="border-radius:0px;" onclick="$('.update_address').css('display', 'none');">Cancel</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<?php
+  }
+?>
+
+<!----------------------------------------------------------->
+<!------------------------EDIT TELEPHONE--------------------->
+<!----------------------------------------------------------->
+<?php
+  $modify = @$_GET['modify'];
+  $id = @$_GET['id'];
+  $contact = @$_GET['contact'];
+
+  if($modify != NULL && $modify == "telephone" && $id != null && $contact != null)
+  {
+?>
+<div class="update_telephone" 
+style="
+    position: absolute; 
+    top: 0; 
+    left:0; 
+    background-color: rgba(0,0,0,.5); 
+    width: 100%; 
+    height:100%; 
+    z-index: 100;
+    align-content:center;
+">
+  <Br>
+    <div style="width: 50%; margin:auto;">  
+        <div class="service h-100">
+            <div class="col-lg-6 section-title">
+                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Telephone Number</span>
+            </div>
+
+            <form style="padding: 10px; margin-top:8px;" method="POST" action="update_contacts.php" autocomplete="off">
+                <input type="hidden" value="<?php echo $id; ?>" name="id"/>
+                <input type="text" value="<?php echo $contact; ?>" name="contact" placeholder="Telephone Number" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
+                <Br>
+                <br>
+                <input type="submit" value="Update" class="btn btn-primary" style="border-radius:0px;" name="updateTelephone"/> 
+                &nbsp; | &nbsp; 
+                <button class="btn btn-light" type="button" style="border-radius:0px;" onclick="$('.update_telephone').css('display', 'none');">Cancel</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<?php
+  }
+?>
+
+
+<!----------------------------------------------------------->
+<!------------------------EDIT MOBILE NUM-------------------->
+<!----------------------------------------------------------->
+<?php
+  $modify = @$_GET['modify'];
+  $id = @$_GET['id'];
+  $contact = @$_GET['contact'];
+
+  if($modify != NULL && $modify == "mobile" && $id != null && $contact != null)
+  {
+?>
+<div class="update_mobile" 
+style="
+    position: absolute; 
+    top: 0; 
+    left:0; 
+    background-color: rgba(0,0,0,.5); 
+    width: 100%; 
+    height:100%; 
+    z-index: 100;
+    align-content:center;
+">
+  <Br>
+    <div style="width: 50%; margin:auto;">  
+        <div class="service h-100">
+            <div class="col-lg-6 section-title">
+                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Mobile Number</span>
+            </div>
+
+            <form style="padding: 10px; margin-top:8px;" method="POST" action="update_contacts.php" autocomplete="off">
+                <input type="hidden" value="<?php echo $id; ?>" name="id"/>
+                <input type="text" value="<?php echo $contact; ?>" name="contact" placeholder="Mobile Number" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
+                <Br>
+                <br>
+                <input type="submit" value="Update" class="btn btn-primary" style="border-radius:0px;" name="updateMobile"/> 
+                &nbsp; | &nbsp; 
+                <button class="btn btn-light" type="button" style="border-radius:0px;" onclick="$('.update_mobile').css('display', 'none');">Cancel</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<?php
+  }
+?>
+
+
+<!----------------------------------------------------------->
+<!------------------------EDIT EMAIL ADD--------------------->
+<!----------------------------------------------------------->
+<?php
+  $modify = @$_GET['modify'];
+  $id = @$_GET['id'];
+  $contact = @$_GET['contact'];
+
+  if($modify != NULL && $modify == "email" && $id != null && $contact != null)
+  {
+?>
+<div class="update_email" 
+style="
+    position: absolute; 
+    top: 0; 
+    left:0; 
+    background-color: rgba(0,0,0,.5); 
+    width: 100%; 
+    height:100%; 
+    z-index: 100;
+    align-content:center;
+">
+  <Br>
+    <div style="width: 50%; margin:auto;">  
+        <div class="service h-100">
+            <div class="col-lg-6 section-title">
+                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Email Address</span>
+            </div>
+
+            <form style="padding: 10px; margin-top:8px;" method="POST" action="update_contacts.php" autocomplete="off">
+                <input type="hidden" value="<?php echo $id; ?>" name="id"/>
+                <input type="text" value="<?php echo $contact; ?>" name="contact" placeholder="Email Address" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" />
+                <Br>
+                <br>
+                <input type="submit" value="Update" class="btn btn-primary" style="border-radius:0px;" name="updateEmail"/> 
+                &nbsp; | &nbsp; 
+                <button class="btn btn-light" type="button" style="border-radius:0px;" onclick="$('.update_email').css('display', 'none');">Cancel</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<?php
+  }
+?>

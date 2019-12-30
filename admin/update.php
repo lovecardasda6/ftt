@@ -1,15 +1,37 @@
 
 <?php
-  $con = @mysqli_connect("localhost","root","","ftt");
-  $id = @$_GET['id'];
-  $action = @$_GET['action'];
+  require_once __DIR__."/require_files/config.php";
+  require_once __DIR__."/require_files/auth.php";
+  
+  $id = @mysqli_real_escape_string($con, $_GET['id']);
+  $action = @mysqli_real_escape_string($con, $_GET['action']);
 
   if($action == "ARCHIVE"){
-    $action_query = "UPDATE tour_packages SET action = 'ARCHIVE' WHERE id=".$id;
+    $action_query = "UPDATE updates SET action = 'ARCHIVE' WHERE id=".$id;
     $exec = mysqli_query($con, $action_query);
   }else if($action == "ACTIVE"){
-    $action_query = "UPDATE tour_packages SET action = 'ACTIVE' WHERE id=".$id;
+    $action_query = "UPDATE updates SET action = 'ACTIVE' WHERE id=".$id;
     $exec = mysqli_query($con, $action_query);
+  }
+
+  if(isset($_POST['save'])){
+    $header = mysqli_real_escape_string($con, $_POST['header']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $image = $_FILES["image"]['name'];
+    $image_tmp =$_FILES['image']['tmp_name'];
+
+    if($image != null || !empty($image)){
+      $image = date('dmYHis').$_FILES["image"]['name'];
+      $q = "INSERT INTO updates (`header`, `description`, `image`) VALUES ('".$header."', '".$description."', '".$image."')";
+
+      if( $exec = mysqli_query($con, $q)){
+        $image_dir = "./../images/updates/".$image;
+        move_uploaded_file($image_tmp, $image_dir);
+      }
+    }else{
+      $q = "INSERT INTO updates (`header`, `description`) VALUES ('".$header."', '".$description."')";
+      $exec = mysqli_query($con, $q);
+    }
   }
 ?>
 
@@ -27,9 +49,6 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    
-    <link rel="stylesheet" href="./gallery_assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="./gallery_assets/css/jquery-ui.css">
     
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
   
@@ -74,14 +93,8 @@
                             </div>
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                              <li><a href="index.php#update" class="nav-link">Update</a></li>
-                              <li><a href="index.php#services" class="nav-link">Services</a></li>
-                              <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
-                              <li><a href="tour_destinations" class="nav-link">New Destinations</a></li>
-                              <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
-                              <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
-                            </ul>
+                                <?php include_once __DIR__."/require_files/navigations.php"; ?>
+                              </ul>
                             </div>
                         </nav>
                         </div>
@@ -97,68 +110,56 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-lg-6 section-title">
-            <h2 class="title text-primary">Tour Package</h2>
+            <h2 class="title text-primary">UPDATES</h2>
           </div>
           <div class="col-lg-6 section-title" style="text-align:right;">
             <a href="#">
-                <span class="icon-add" style="font-size:24px;" >Add New Package</span>
+            <span class="icon-add" style="font-size:24px;" onclick="$('.post_update').css('display', 'block ');" >Post Update</span>
             </a>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-12 ml-auto">
-            <div class="row">
+
 
               <?php
-                $tour_package_query = "SELECT * FROM tour_packages ORDER BY package_name ASC";
+                $tour_package_query = "SELECT * FROM updates ORDER BY id DESC LIMIT 0,25";
 
                 if($result = mysqli_query($con, $tour_package_query))
                 {
                   while($row = mysqli_fetch_assoc($result )){
-                    $package_id = $row['id'];
-                    $package_destionation_query = "SElECT * FROM package_destinations WHERE tour_package_id = ".$package_id;
 
               ?>
                   <!---------------------------------->
-                  <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                    <div class="service h-100" style="position:relative;">
-                    
-                    <div style="position:absolute; top:0px; right: 0px; color: white; font-weight:bold; background-color: rgb(0, 123, 255); padding: 10px 5px;">
-                        <?php
-                            echo $row['action'] == "ARCHIVE"? "ARCHIVE" : "ACTIVE";
-                        ?>
+                  <div class="row">
+                    <div class="col-lg-4 mb-4">
+                      <img src="./../images/updates/<?php echo $row['image']; ?>" alt="Image" class="img-fluid" class="img-fluid">
                     </div>
+                    <div class="col-lg-8 " style="position:relative;">
 
-
-                      <span class="icon-map-marker display-4 text-primary d-block mb-4"></span>
-                      <h3><?php echo $row["package_name"] ?></h3>
-                      <?php
-                        $package_destionation_query = "SElECT * FROM package_destinations WHERE tour_package_id = ".$package_id." ORDER BY destination ASC";
-                        if($result2 = mysqli_query($con, $package_destionation_query)){
-                          while($row2 = mysqli_fetch_assoc($result2)){
-                      ?>
-                        <li><?php echo $row2['destination']; ?></li>
-                      <?php
-                          }
-                        }
-                      ?>
+                      <div style="position:absolute; top: 30px; right: 30px;">
+                        <a target="_blank" href="update_modify.php?id=<?php echo $row['id']; ?>">
+                          <span class="icon-edit" style="font-size: 24px;"></span>
+                        </a> 
+                        &nbsp; | &nbsp;
+                        <a href="?id=<?php echo $row['id']; ?>&action=<?php echo $row['action'] == "ARCHIVE"? "ACTIVE" : "ARCHIVE"; ?>">
+                         <?php echo $row['action'] == "ARCHIVE"? "<span class='icon-check' style='font-size: 24px;'></span>" : "<span class='icon-archive' style='font-size: 24px;'></span>"; ?>
+                        </a>
+                      </div>
                       <br>
-                      <span class="sub-title mb-2 d-block">
-                        <h5 class="title text-primary">Price : Php <?php echo $row['price']; ?></h5>
-
-                        <a href="#">MODIFY</a> | <a href="?id=<?php echo $row['id']; ?>&action=<?php echo $row['action'] == "ARCHIVE"? "ACTIVE" : "ARCHIVE"; ?>"><?php echo $row['action'] == "ARCHIVE"? "ACTIVE" : "ARCHIVE"; ?></a>
-                      </span>
+                      <h2 class="title text-primary mb-3" style="line-height: 15px;"><?php echo $row['header']; ?></h2>
+                      <label style="margin-top: -65px;">Posted : <?php echo $row['posted']; ?></label>
+                      <br><br>
+                      <p class="mb-4"><?php echo $row['description']; ?></p>
+                      
                     </div>
-                    
-                  </div><!---------------------------------->
+                  </div>
+                  <hr>
+                  <!---------------------------------->
               <?php
                   }
                 }
               ?>
 
-            </div>
-          </div>
-        </div>
+
       </div>
     </div> <!-- END .site-section -->
 <!---------------------------------------------------------------------------------------------->
@@ -177,21 +178,16 @@
   
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/main.js"></script>
-
-  <script src="./gallery_assets/js/jquery-ui.js"></script>
-  <script src="./gallery_assets/js/jquery.stellar.min.js"></script>
-  <script src="./gallery_assets/js/jquery.countdown.min.js"></script>
-  <script src="./gallery_assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="./gallery_assets/js/bootstrap-datepicker.min.js"></script>
      
   </body>
 </html>
 
 
+
 <!----------------------------------------------------------->
-<!---------------------ADD NEW PACKAGE FORM------------------>
+<!-------------------------ADD NEW  FORM--------------------->
 <!----------------------------------------------------------->
-<div class="add_new_package align-items-center" 
+<div class="post_update" 
 style="
     display: none;
     position: absolute; 
@@ -201,38 +197,32 @@ style="
     width: 100%; 
     height:100%; 
     z-index: 100;
+    align-content:center;
 ">
-    <div class="col-6">
+    <div style="width: 50%; margin:auto;">  
         <div class="service h-100">
             <div class="col-lg-6 section-title">
-                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Package Informations</span>
+                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Post Update</span>
             </div>
 
-            <form style="padding: 10px; margin-top:8px;">
-                <input type="text" placeholder="Package Name" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Price" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
+            <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off" enctype="multipart/form-data">
+                <label for="avatar">Choose image : </label>
                 <Br>
+                <input type="file"
+                      id="avatar" name="image"
+                      accept="image/png, image/jpeg">
+                <br><br>
+                <input type="text" require name="header" placeholder="Header" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:15px;" /> 
+                <label>Description</label>
+                <textarea name="description" style="width: 100%; height: 300px; font-size: 18px; margin-bottom:5px;"> </textarea>
                 <br>
-                <span style="font-size:18px; color: rgb(0,123,255); font-weight:bold;">Destinations</span>
-                <input type="text" placeholder="Destination 1" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 2" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 3" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 4" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 5" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 6" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 7" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 8" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 9" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 10" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 11" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <input type="text" placeholder="Destination 12" style="width: 100%; padding-left: 10px; font-size: 18px; margin-bottom:5px;" /> 
-                <br> <br>
-                <input type="submit"/> | <input type="submit"/>
+                <input type="submit" style="border-radius:0px;" value="Save" name="save" class="btn btn-primary"/> 
+                &nbsp; | &nbsp;  
+                <button type="button" style="border-radius:0px;" onclick="$('.post_update').css('display', 'none');" class="btn btn-light">Cancel</button>
             </form>
-
         </div>
     </div>
 </div>
 <!----------------------------------------------------------->
-<!---------------------ADD NEW PACKAGE FORM------------------>
+<!-------------------------ADD NEW  FORM--------------------->
 <!----------------------------------------------------------->

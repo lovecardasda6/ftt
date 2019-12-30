@@ -1,3 +1,8 @@
+<?php
+  require_once __DIR__."/required_files/config.php";
+  
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,7 +49,18 @@
                     <div class="row align-items-center">
                         <div class="col-10 col-md-10" style="padding:0px; margin:0px;">
                         <h1 class="my-0 site-logo">
-                            <img src="./images/img.png"style=" width: 62px;height: 62px;"/>
+                        <?php 
+                            $res = mysqli_query($con, "SELECT * FROM images WHERE `type` = 'logo'");
+                            if($res)
+                            {
+                                while($row = mysqli_fetch_assoc($res))
+                                {
+                        ?>
+                                    <img src="./images/<?php echo $row['image']; ?>"style=" width: 62px;height: 62px;"/> 
+                        <?php
+                                }
+                            }
+                        ?>
                             <a href="index.php">Fely's Tours & Travel<span class="text-primary">.</span> </a>
                         </h1>
                         </div>
@@ -59,19 +75,9 @@
                             </div>
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                                <li><a href="index.php#home-section" class="nav-link">Home</a></li>
-								<li><a href="index.php#update" class="nav-link">Update</a></li>
-								<!-- <li><a href="#about-us-section" class="nav-link">About Us</a></li> -->
-								
-								<li><a href="index.php#services" class="nav-link">Services</a></li>
-								
-								<li><a href="index.php#what-we-do-section" class="nav-link">Tour Package</a></li>
-								<!-- <li><a href="#what-we-do-section" class="nav-link">What We Do</a></li> -->
-								<li><a href="index.php#portfolio-section" class="nav-link">New Destinations</a></li>
-								<!-- <li><a href="#portfolio-section" class="nav-link">Portfolio</a></li> -->
-								<li><a href="photos.php" class="nav-link">Photos</a></li>
-								<li><a href="index.php#contact-section" class="nav-link">Contact</a></li>
-								<li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
+                                <?php
+                                    require_once __DIR__."/required_files/page_navigations.php";
+                                ?>
                             </ul>
                             </div>
                         </nav>
@@ -103,37 +109,29 @@
                     <div class="row align-items-stretch">
                         
                         <?php 
-                           $con = @mysqli_connect("localhost","root","","ftt");
-                           if (mysqli_connect_errno()) {
-                            echo "<div style='text-align:center;'>Failed to connect to the Server. Please contact the administrator</div>";
-                            exit();
-                          }
-                          else
-                          {
-
                             $query = "select albums.id, albums.title from albums";
-                            if($result = mysqli_query($con, $query)){
-                                while ($row = mysqli_fetch_row($result)) {
-                                    $q2 = "select count(id) as `photos`, destination from images where album_id = ".$row[0];
-                                    if($r2 = mysqli_query($con, $q2)){
-                                        $data = mysqli_fetch_row($r2);
+                            if($result = mysqli_query($con, $query))
+                            {
+                                while ($row = mysqli_fetch_assoc($result)) 
+                                {
+                                    $pid = $row['id'];
+                                    $image = mysqli_query($con, "select image, count(id) as `total` from photos where id = ".$pid);
+                                    $image_exec = mysqli_fetch_assoc($image);
                         ?>
                             <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-                                <a href="single.php?id=<?php echo $row[0]; ?>" class="d-block photo-item" style="position:relative;">
-                                    <img src="<?php echo "./photos/".$data[1] ?>" alt="Image" class="img-fluid">
+                                <a href="single.php?id=<?php echo $pid; ?>" class="d-block photo-item" style="position:relative;">
+                                    <img src="./photos/<?php echo $image_exec['image'] ?>" alt="Image" class="img-fluid">
                                     <div class="photo-text-more">
                                         <div class="photo-text-more">
-                                            <h3 class="heading"><?php echo $row[1]; ?></h3>
-                                            <span class="meta"><?php echo $data[0]." Photos"; ?></span>
+                                            <h3 class="heading"><?php echo $row["title"]; ?></h3>
+                                            <span class="meta"><?php echo $image_exec['total']." Photos"; ?></span>
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         <?php 
-                                    }
-                                }
-                            }                        
-                        }
+                                }                        
+                            }
                         ?>
 
                     </div>

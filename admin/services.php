@@ -1,8 +1,10 @@
 
 <?php
-  $con = @mysqli_connect("localhost","root","","ftt");
-  $id = @$_GET['id'];
-  $action = @$_GET['action'];
+  require_once __DIR__."/require_files/config.php";
+  require_once __DIR__."/require_files/auth.php";
+  
+  $id = @mysqli_real_escape_string($con, $_GET['id']);
+  $action = @mysqli_real_escape_string($con, $_GET['action']);
 
   if($action == "ARCHIVE"){
     $action_query = "UPDATE services SET action = 'ARCHIVE' WHERE id=".$id;
@@ -35,8 +37,8 @@
 
 /***************************************************/
   if(isset($_POST['saveShippings'])){
-    $service_name = $_POST['service_name'];
-    $description = $_POST['description'];
+    $service_name = mysqli_real_escape_string($con, $_POST['service_name']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
     $image_name = $_FILES["image"]['name'];
     $image_tmp =$_FILES['image']['tmp_name'];
 
@@ -114,14 +116,8 @@
                             </div>
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                              <li><a href="index.php#update" class="nav-link">Update</a></li>
-                              <li><a href="services.php" class="nav-link">Services</a></li>
-                              <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
-                              <li><a href="tour_destinations.php" class="nav-link">New Destinations</a></li>
-                              <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
-                              <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
-                            </ul>
+                                <?php include_once __DIR__."/require_files/navigations.php"; ?>
+                              </ul>
                             </div>
                         </nav>
                         </div>
@@ -469,7 +465,7 @@ style="
     <div style="width: 50%; margin:auto;">  
         <div class="service h-100">
             <div class="col-lg-6 section-title">
-                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Service Informations</span>
+                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Airline Informations</span>
             </div>
 
             <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off" enctype="multipart/form-data">
@@ -483,7 +479,9 @@ style="
                 <label>Service Description</label>
                 <textarea name="description" style="width: 100%; height: 300px; font-size: 18px; margin-bottom:5px;"> </textarea>
                 <br>
-                <input type="submit" value="Save" name="saveAirLines" class="btn btn-primary"/> | <button onclick="$('.add_new_package').css('display', 'none');" class="btn btn-light">Cancel</button>
+                <input type="submit" style="border-radius:0px" value="Save" name="saveAirLines" class="btn btn-primary"/> 
+                &nbsp; | &nbsp;
+                <button type="button" style="border-radius:0px" onclick="$('.add_new_airlines').css('display', 'none');" class="btn btn-light">Cancel</button>
             </form>
 
         </div>
@@ -511,7 +509,7 @@ style="
     <div style="width: 50%; margin:auto;">  
         <div class="service h-100">
             <div class="col-lg-6 section-title">
-                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Service Informations</span>
+                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Shipping Informations</span>
             </div>
 
             <form style="padding: 10px; margin-top:8px;" method="POST" autocomplete="off" enctype="multipart/form-data">
@@ -525,7 +523,9 @@ style="
                 <label>Service Description</label>
                 <textarea name="description" style="width: 100%; height: 300px; font-size: 18px; margin-bottom:5px;"> </textarea>
                 <br>
-                <input type="submit" value="Save" name="saveShippings" class="btn btn-primary"/> | <button onclick="$('.add_new_package').css('display', 'none');" class="btn btn-light">Cancel</button>
+                <input type="submit" style="border-radius:0px" value="Save" name="saveShippings" class="btn btn-primary"/> 
+                &nbsp; | &nbsp;
+                <button type="button" style="border-radius:0px" onclick="$('.add_new_shippings').css('display', 'none');" class="btn btn-light">Cancel</button>
             </form>
 
         </div>

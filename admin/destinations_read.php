@@ -1,6 +1,8 @@
 
 <?php
-  $con = @mysqli_connect("localhost","root","","ftt");
+  require_once __DIR__."/require_files/config.php";
+  require_once __DIR__."/require_files/auth.php";
+  
   $id = @$_GET['id'];
   $action = @$_GET['action'];
 
@@ -31,9 +33,6 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    
-    <link rel="stylesheet" href="./gallery_assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="./gallery_assets/css/jquery-ui.css">
     
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
   
@@ -71,21 +70,15 @@
                         <nav class="site-navigation text-right" role="navigation">
                             <div class="container">
 
-                            <div class="d-inline-block d-lg-block ml-md-0 mr-auto py-3">
-                                <a href="#" class="site-menu-toggle js-menu-toggle text-black">
-                                <span class="icon-menu h3"></span> <span class="menu-text"></span>
-                                </a>
-                            </div>
+                                <div class="d-inline-block d-lg-block ml-md-0 mr-auto py-3">
+                                    <a href="#" class="site-menu-toggle js-menu-toggle text-black">
+                                    <span class="icon-menu h3"></span> <span class="menu-text"></span>
+                                    </a>
+                                </div>
 
-                            <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                              <li><a href="index.php#update" class="nav-link">Update</a></li>
-                              <li><a href="services.php" class="nav-link">Services</a></li>
-                              <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
-                              <li><a href="tour_destinations.php" class="nav-link">New Destinations</a></li>
-                              <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
-                              <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
-                            </ul>
+                                <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
+                                    <?php include_once __DIR__."/require_files/navigations.php"; ?>
+                                </ul>
                             </div>
                         </nav>
                         </div>
@@ -166,12 +159,6 @@
   
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/main.js"></script>
-
-  <script src="./gallery_assets/js/jquery-ui.js"></script>
-  <script src="./gallery_assets/js/jquery.stellar.min.js"></script>
-  <script src="./gallery_assets/js/jquery.countdown.min.js"></script>
-  <script src="./gallery_assets/js/jquery.magnific-popup.min.js"></script>
-  <script src="./gallery_assets/js/bootstrap-datepicker.min.js"></script>
      
   </body>
 </html>

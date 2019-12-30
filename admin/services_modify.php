@@ -1,8 +1,10 @@
 
 <?php
-  $con = @mysqli_connect("localhost","root","","ftt");
-  $id = @$_GET['id'];
-  $type= @$_GET['type'];
+  require_once __DIR__."/require_files/config.php";
+  require_once __DIR__."/require_files/auth.php";
+  
+  $id = mysqli_real_escape_string($con, @$_GET['id']);
+  $type= mysqli_real_escape_string($con, @$_GET['type']);
 
   if(isset($_POST['save'])){
     $service_name = mysqli_real_escape_string($con, $_POST['service_name']);
@@ -11,24 +13,32 @@
     $image_tmp =$_FILES['image']['tmp_name'];
 
     if($image_name != null || !empty($image_name)){
-        $update_query = "UPDATE `services` SET `name`='".$service_name."', `description`='".$description."', `image` = '".$image_name."' WHERE id = ".$id;
-        if($exec = mysqli_query($con, $update_query)){
-            if($type == "Airlines"){
-                $image_dir = "./../images/airlines/".date('dmYHis').$image_name;
-                move_uploaded_file($image_tmp, $image_dir);
-            }else{
-                $image_dir = "./../images/shippings/".date('dmYHis').$image_name;
+        if($type == "Airlines")
+        {
+            $image_name = date('dmYHis').$_FILES["image"]['name'];
+            $update_query = "UPDATE `services` SET `name`='".$service_name."', `description`='".$description."', `image` = '".$image_name."' WHERE id = ".$id;
+            if($exec = mysqli_query($con, $update_query))
+            {
+                $image_dir = "./../images/airlines/".$image_name;
                 move_uploaded_file($image_tmp, $image_dir);
             }
-            
         }
-    }else{
+        else
+        {
+            $image_name = date('dmYHis').$_FILES["image"]['name'];
+            $update_query = "UPDATE `services` SET `name`='".$service_name."', `description`='".$description."', `image` = '".$image_name."' WHERE id = ".$id;
+            if($exec = mysqli_query($con, $update_query))
+            {
+                $image_dir = "./../images/shippings/".$image_name;
+                move_uploaded_file($image_tmp, $image_dir);
+            }
+        }
+    }
+    else
+    {
         $update_query = "UPDATE `services` SET `name`='".$service_name."', `description`='".$description."' WHERE id = ".$id;
         $exec = mysqli_query($con, $update_query);
     }
-    
-
-
   }
 ?>
 
@@ -90,14 +100,8 @@
                             </div>
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                              <li><a href="index.php#update" class="nav-link">Update</a></li>
-                              <li><a href="services.php" class="nav-link">Services</a></li>
-                              <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
-                              <li><a href="tour_destinations.php" class="nav-link">New Destinations</a></li>
-                              <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
-                              <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
-                            </ul>
+                                <?php include_once __DIR__."/require_files/navigations.php"; ?>
+                              </ul>
                             </div>
                         </nav>
                         </div>
@@ -144,7 +148,7 @@
                                         <label>Service Description</label>
                                         <textarea name="description" style="width: 100%; height: 300px; font-size: 18px; margin-bottom:5px;"> <?php echo $row['description']; ?></textarea>
                                         <br>
-                                        <input type="submit" value="Save" name="save" class="btn btn-primary"/>
+                                        <input type="submit" value="Update" name="save" class="btn btn-primary" style="border-radius:0px;"/>
                                     </form>
                         <?php
                                 }

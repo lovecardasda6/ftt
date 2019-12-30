@@ -1,3 +1,35 @@
+<?php
+
+  require_once __DIR__."/require_files/config.php";
+  
+  session_start();
+  $invalid = false;
+  if(isset($_POST['login']))
+  {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $q = "SELECT id FROM users WHERE `username` = '".$username."' AND `password` = '".$password."' AND `status` != 'ARCHIVE'";
+    $exec = mysqli_query($con, $q);
+    $fetch = mysqli_fetch_assoc($exec);
+    $id = $fetch['id'];
+
+    if($id != 0 || $id != NULL || !empty($id))
+    {
+      $token = "0923j21313fasf12090asdi09m";
+      $q = "UPDATE users SET `token` = '".$token."' WHERE `id` = ".$id;
+      $exec = mysqli_query($con, $q);
+      $_SESSION['token'] = $token;
+      header("Location: home.php");
+    }
+    else
+    {
+      $invalid = true;
+    }
+    
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,19 +80,28 @@
             </div>
         </div> <!-- END .site-navbar-wrap -->
 
-        <div class="container">
-			 <div class="row align-items-center" style="border:1px solid; justify-content:center;">
-        
-        <br>
-				 <div class="col-lg-4 mb-5" style="border:1px solid; padding: 25px;">
-					<input type="text" placeholder="Username" style="margin: 5px 0px; padding-left: 5px; width: 250px;"/>
-					<br>
-					<input type="password" placeholder="Password" style="margin: 5px 0px; padding-left: 5px;  width: 250px;"/>
-					<br>
-					<input type="submit" title="dasd"	>
-				</div>
-			</div>
-		</div>
+
+        <div class="container" style="margin-top: 150px;">
+          <div style="width: 35%; margin: auto; text-align:center;">
+            <?php if($invalid){ ?>
+              <label>Invalid username and/or password.</label>
+            <?php } ?>
+            <h1>Account Login</h1>
+          </div>
+          <Br>
+          
+          <div style="width: 30%; height: 300px; margin: auto; padding: 15px;">
+            <form method="POST" autocomplete="off">
+              <label for="">Username : </label>
+              <input type="text" style="width: 100%; padding-left: 5px;" placeholder="Username" name="username"/>
+              <br><br>
+              <label for="">Password : </label>
+              <input type="password" style="width: 100%; padding-left: 5px;" placeholder="Password" name="password"/>
+              <hr>
+              <input type="submit" class="btn btn-primary" name="login" value="Login" style="border-radius:0px;"/>
+            </form>
+          </div>
+        </div><!-- END .site-navbar-wrap -->
         
     </div>
   </body>

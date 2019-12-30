@@ -1,35 +1,51 @@
 
 <?php
-  $con = @mysqli_connect("localhost","root","","ftt");
-  $id = @$_GET['id'];
-  $action = @$_GET['action'];
+  require_once __DIR__."/require_files/config.php";
+  require_once __DIR__."/require_files/auth.php";
+  
+    $id = @$_GET['id'];
+    $action = @$_GET['action'];
 
-  if($action == "ARCHIVE"){
-    $action_query = "UPDATE tour_destinations SET action = 'ARCHIVE' WHERE id=".$id;
-    $exec = mysqli_query($con, $action_query);
-  }else if($action == "ACTIVE"){
-    $action_query = "UPDATE tour_destinations SET action = 'ACTIVE' WHERE id=".$id;
-    $exec = mysqli_query($con, $action_query);
-  }
+    if(isset($_POST['save'])){
+        $destinations = mysqli_real_escape_string($con, $_POST['destinations']);
+        $description = mysqli_real_escape_string($con, $_POST['description']);
+        
+        $save_query = "UPDATE `tour_destinations` SET `destinations` = '".$destinations."', `description` = '".$description."' WHERE `id` = ". $id;
+        $exec = mysqli_query($con, $save_query);
 
-  if(isset($_POST['save'])){
-    $destinations = mysqli_real_escape_string($con, $_POST['destinations']);
-    $description = mysqli_real_escape_string($con, $_POST['description']);
-    
-    $save_query = "UPDATE `tour_destinations` SET `destinations` = '".$destinations."', `description` = '".$description."' WHERE `id` = ". $id;
-    $exec = mysqli_query($con, $save_query);
+        if($exec){
+            if($_FILES['image1']['name'] != null || !empty($_FILES['image1']['name']))
+            {
+                $id = $_POST['id1'];
+                $image_name = date('dmYHis').$_FILES["image1"]['name'];
+                $image_tmp =$_FILES['image1']['tmp_name'];
 
-    if($exec){
-        echo 1;
+                $save_query = "UPDATE`tour_destination_image` SET `image` = '".$image_name."' WHERE `id` = ".$id;
+                if($exec = mysqli_query($con, $save_query))
+                {
+                    $image_dir = "./../images/tour_destinations/".$image_name;
+                    move_uploaded_file($image_tmp, $image_dir);
+                }
+
+            }
+            if($_FILES['image2']['name'] != null || !empty($_FILES['image2']['name']))
+            {
+                $id = $_POST['id2'];
+                $image_name = date('dmYHis').$_FILES["image2"]['name'];
+                $image_tmp =$_FILES['image2']['tmp_name'];
+
+                $save_query = "UPDATE`tour_destination_image` SET `image` = '".$image_name."' WHERE `id` = ".$id;
+                if($exec = mysqli_query($con, $save_query))
+                {
+                    $image_dir = "./../images/tour_destinations/".$image_name;
+                    move_uploaded_file($image_tmp, $image_dir);
+                }
+            }
+            echo "<script>alert('Destination successfully updated.');</script>";
+        }
     }
-    else{
-        echo mysqli_error($con);
-    }
-  }
 
-  $q = "SELECT * FROM tour_destinations WHERE id = ".$id;
-  $res = mysqli_query($con, $q);
-  $fetch = mysqli_fetch_assoc($res);
+
 ?>
 
 <!DOCTYPE html>
@@ -90,14 +106,8 @@
                             </div>
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                              <li><a href="index.php#update" class="nav-link">Update</a></li>
-                              <li><a href="services.php" class="nav-link">Services</a></li>
-                              <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
-                              <li><a href="tour_destinations.php" class="nav-link">New Destinations</a></li>
-                              <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
-                              <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
-                            </ul>
+                                <?php include_once __DIR__."/require_files/navigations.php"; ?>
+                              </ul>
                             </div>
                         </nav>
                         </div>
@@ -116,7 +126,13 @@
                     <h2 class="title text-primary">TOUR DESTINATIONS</h2>
                 </div>
             </div>
-            
+            <?php
+                  $qfetch = "SELECT * FROM tour_destinations WHERE id = ".$id;
+                  if($results = mysqli_query($con, $qfetch))
+                  {
+                    while($fetch = mysqli_fetch_assoc($results))
+                    {
+            ?>
             <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12 ml-auto">
@@ -157,7 +173,10 @@
                     </div>
                 </div>
             </form>
-
+            <?php
+                    }
+                }
+            ?>
         </div>
     </div> <!-- END .site-section -->
 <!---------------------------------------------------------------------------------------------->
