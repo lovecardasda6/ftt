@@ -396,7 +396,7 @@
           </div>
           <div class="col-lg-5 h-100 jm-sticky-top ml-auto">
             <h3><?php echo $row['destinations']; ?></h3>
-            <p class="mb-4"><?php echo $row['description']; ?></p>
+            <pre class="mb-4" style="font-family:Arial;  white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap;  white-space: -o-pre-wrap; word-wrap: break-word; "><?php echo $row['description']; ?></pre>
           </div>
         </div>
         <?php 
@@ -420,7 +420,7 @@
           </div>
           <div class="col-lg-5 h-100 jm-sticky-top mr-auto order-2 order-lg-1">
             <h3><?php echo $row['destinations']; ?></h3>
-            <p class="mb-4"><?php echo $row['description']; ?></p>
+            <pre class="mb-4" style="font-family:Arial;  white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap;  white-space: -o-pre-wrap; word-wrap: break-word; "><?php echo $row['description']; ?></pre>
           </div>
         </div>
 
@@ -465,7 +465,7 @@
               <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                 <div class="service h-100 align-items-center" style="text-align: center;">
                   <img src="./images/other_services/<?php echo $row['image'] ?>" 
-                  style="width: 150px; height: 150px; margin: 0px 0px 25px 0px;">
+                  style="width: 150px; margin: 0px 0px 25px 0px;">
                   <h3><?php echo $row['service_name'] ?></h3>
                   <li><?php echo $row['description'] ?></li>
                   <br>
