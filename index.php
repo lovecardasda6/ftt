@@ -151,7 +151,7 @@
                   <!---------------------------------->
                   <div class="row">
                     <div class="col-lg-4 mb-4">
-                      <img src="./../images/updates/<?php echo $row['image']; ?>" alt="Image" class="img-fluid" class="img-fluid">
+                      <img src="./images/updates/<?php echo $row['image']; ?>" alt="Image" class="img-fluid" class="img-fluid">
                     </div>
                     <div class="col-lg-8 ml-auto section-title">
                     
