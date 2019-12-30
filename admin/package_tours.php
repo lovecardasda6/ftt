@@ -1,6 +1,8 @@
 
 <?php
-  $con = @mysqli_connect("localhost","root","","ftt");
+  require_once __DIR__."/require_files/config.php";
+  require_once __DIR__."/require_files/auth.php";
+  
   $id = @$_GET['id'];
   $action = @$_GET['action'];
 
@@ -130,13 +132,7 @@
                             </div>
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                              <li><a href="index.php#update" class="nav-link">Update</a></li>
-                              <li><a href="services.php" class="nav-link">Services</a></li>
-                              <li><a href="package_tours.php" class="nav-link">Tour Package</a></li>
-                              <li><a href="tour_destinations.php" class="nav-link">New Destinations</a></li>
-                              <li><a href="photos.php" class="nav-link">Photos</a></li>
-                              <li><a href="contacts.php" class="nav-link">Contact</a></li>
-                              <li><a href="index.php#other-services-offered" class="nav-link">Other Services Offered</a></li>
+                              <?php include_once __DIR__."/require_files/navigations.php"; ?>
                             </ul>
                             </div>
                         </nav>
