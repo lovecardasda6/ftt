@@ -124,11 +124,11 @@
                   <!---------------------------------->
                   <div class="row">
                     <div class="col-lg-4 mb-4">
-                      <img src="./../images/updates/<?php echo $row['image']; ?>" alt="Image" class="img-fluid" class="img-fluid">
+                      <img src="./images/updates/<?php echo $row['image']; ?>" alt="Image" class="img-fluid" class="img-fluid">
                     </div>
                     <div class="col-lg-8 ml-auto section-title">
                     
-                      <h2 class="title text-primary mb-3" style="line-height: 15px;"><?php echo $row['id']; ?></h2>
+                      <h2 class="title text-primary mb-3" style="line-height: 15px;"><?php echo $row['header']; ?></h2>
                       <label style="margin-top: -65px;">Posted : <?php echo $row['posted']; ?></label>
                       <br><br>
                       <p class="mb-4"><?php echo $row['description']; ?></p>

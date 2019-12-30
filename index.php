@@ -299,7 +299,7 @@
 <!---------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------->
 <!-- .START site-section -->
-    <div class="site-section bg-light" id="what-we-do-section">
+    <div class="site-section bg-light" id="tour_package">
       <div class="container">
         <div class="row mb-5">
           <div class="col-lg-6 section-title">
@@ -357,7 +357,7 @@
 <!---------------------------------------------------------------------------------------------->
 
     <!------------------------------------------------------------------------------------------->
-    <div class="site-section" id="portfolio-section">
+    <div class="site-section" id="destinations">
       <div class="container">
         <div class="row mb-5 ">
           <div class="col-md-8 section-title text-center mx-auto">
