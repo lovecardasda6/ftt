@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Shutter &mdash; Colorlib Website Template</title>
+    <title>Fely's Tours and Travel - Trips for Keeps</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -130,7 +130,7 @@
                 <!---------------------------------------------------------------------------->
                     <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
                         <a href="single.php?id=<?php echo $row['id']; ?>" class="d-block photo-item">
-                            <img src="./../photos/<?php echo $row2['image']; ?>" alt="Image" class="img-fluid">
+                            <img src="./photos/<?php echo $row2['image']; ?>" alt="Image" class="img-fluid">
                             <div class="photo-text-more">
                             <div class="photo-text-more">
                             <h3 class="heading"><?php echo $row['title']; ?></h3>

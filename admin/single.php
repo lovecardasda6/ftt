@@ -5,12 +5,106 @@
   
   $id =  @mysqli_real_escape_string($con, $_GET['id']);
 
+
+  if($_GET['action'] != null && $_GET['delete_id'] != null)
+  {
+    $delete_id = $_GET['delete_id'];
+    $q = "DELETE FROM photos WHERE id = ".$delete_id;
+    $exec = mysqli_query($con, $q);
+  }
+ 
+  if(isset($_POST['upload']))
+  {
+    $image1 = $_FILES['image1']['name'];
+    $image2 = $_FILES['image2']['name'];
+    $image3 = $_FILES['image3']['name'];
+    $image4 = $_FILES['image4']['name'];
+    $image5 = $_FILES['image5']['name'];
+    $image6 = $_FILES['image6']['name'];
+    $image7 = $_FILES['image7']['name'];
+
+    $tmp_name_image1 = $_FILES['image1']['tmp_name'];
+    $tmp_name_image2 = $_FILES['image2']['tmp_name'];
+    $tmp_name_image3 = $_FILES['image3']['tmp_name'];
+    $tmp_name_image4 = $_FILES['image4']['tmp_name'];
+    $tmp_name_image5 = $_FILES['image5']['tmp_name'];
+    $tmp_name_image6 = $_FILES['image6']['tmp_name'];
+    $tmp_name_image7 = $_FILES['image7']['tmp_name'];
+
+    if($image1 != null || !empty($image1))
+    {
+      $image1 = date('dmYHis').$_FILES["image1"]['name'];
+      $q = "INSERT INTO `photos` (`album_id`, `image`) VALUES ('".$id."', '".$image1."')";
+      $exec = mysqli_query($con, $q);
+
+      $image_dir = "./../photos/".$image1;
+      move_uploaded_file($tmp_name_image1, $image_dir);
+    }
+
+    if($image2 != null || !empty($image2))
+    {
+      $image2 = date('dmYHis').$_FILES["image2"]['name'];
+      $q = "INSERT INTO `photos` (`album_id`, `image`) VALUES ('".$id."', '".$image2."')";
+      $exec = mysqli_query($con, $q);
+      $image_dir = "./../photos/".$image2;
+      move_uploaded_file($tmp_name_image2, $image_dir);
+    }
+
+    if($image3 != null || !empty($image3))
+    {
+      $image3 = date('dmYHis').$_FILES["image3"]['name'];
+      $q = "INSERT INTO `photos` (`album_id`, `image`) VALUES ('".$id."', '".$image3."')";
+      $exec = mysqli_query($con, $q);
+      $image_dir = "./../photos/".$image3;
+      move_uploaded_file($tmp_name_image3, $image_dir);
+    }
+
+    if($image4 != null || !empty($image4))
+    {
+      $image4 = date('dmYHis').$_FILES["image4"]['name'];
+      $q = "INSERT INTO `photos` (`album_id`, `image`) VALUES ('".$id."', '".$image4."')";
+      $exec = mysqli_query($con, $q);
+
+      $image_dir = "./../photos/".$image4;
+      move_uploaded_file($tmp_name_image4, $image_dir);
+    }
+
+    if($image5 != null || !empty($image5))
+    {
+      $image5 = date('dmYHis').$_FILES["image5"]['name'];
+      $q = "INSERT INTO `photos` (`album_id`, `image`) VALUES ('".$id."', '".$image5."')";
+      $exec = mysqli_query($con, $q);
+
+      $image_dir = "./../photos/".$image5;
+      move_uploaded_file($tmp_name_image5, $image_dir);
+    }
+
+    if($image6 != null || !empty($image6))
+    {
+      $image6 = date('dmYHis').$_FILES["image6"]['name'];
+      $q = "INSERT INTO `photos` (`album_id`, `image`) VALUES ('".$id."', '".$image6."')";
+      $exec = mysqli_query($con, $q);
+
+      $image_dir = "./../photos/".$image6;
+      move_uploaded_file($tmp_name_image6, $image_dir);
+    }
+
+    if($image7 != null || !empty($image7))
+    {
+      $image7 = date('dmYHis').$_FILES["image7"]['name'];
+      $q = "INSERT INTO `photos` (`album_id`, `image`) VALUES ('".$id."', '".$image7."')";
+      $exec = mysqli_query($con, $q);
+        
+      $image_dir = "./../photos/".$image7;
+      move_uploaded_file($tmp_name_image7, $image_dir);
+    }
+  }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <title>Shutter &mdash; Colorlib Website Template</title>
+    <title>Fely's Tours and Travel - Trips for Keeps</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -111,6 +205,21 @@
 
 
 
+        <div class="container">
+          <div class="row mb-5"><!-- .START site-section -->
+            <div class="col-lg-12 section-title" style="text-align:right;">
+              <a href="#">
+                <span class="icon-add" style="font-size:21px;" onclick="$('.upload_image').css('display', 'block ');" >Upload photos</span>
+              </a>
+            </div>
+          </div>
+        </div>  
+
+
+
+
+
+
   <div style="margin:auto; width: 90%; ">
     <main class="main-content" style=" width: 100%; ">
       <div class="container-fluid photos">
@@ -153,8 +262,14 @@
       ?>
 
           <?php if($count == 1){ ?>
-          <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up">
-            <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
+          <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>  
+          
+            <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery" >
+            
+            
+
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
                 <span class="icon icon-search"></span>
@@ -163,7 +278,9 @@
           </div>
 
           <?php }else if($count == 2){ ?>
-          <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>
             <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
@@ -173,7 +290,9 @@
           </div>
 
           <?php }else if($count == 3){ ?>
-          <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>
             <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
@@ -183,7 +302,9 @@
           </div>
 
           <?php }else if($count == 4){ ?>
-          <div class="col-6 col-md-6 col-lg-8" data-aos="fade-up">
+          <div class="col-6 col-md-6 col-lg-8" data-aos="fade-up" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>
             <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
@@ -193,7 +314,9 @@
           </div>
 
           <?php }else if($count == 5){ ?>
-          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>
             <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
@@ -203,7 +326,9 @@
           </div>
 
           <?php }else if($count == 6){ ?>
-          <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up">
+          <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>
             <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
@@ -213,7 +338,9 @@
           </div>
 
           <?php }else if($count == 7){ ?>
-          <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-6 col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>
             <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
@@ -223,7 +350,9 @@
           </div>
 
           <?php }else if($count == 8){ ?>
-          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>
             <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
@@ -233,7 +362,9 @@
           </div>
 
           <?php }else if($count == 9){ ?>
-          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>
             <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
@@ -243,7 +374,9 @@
           </div>
 
           <?php }else if($count == 10){ ?>
-          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200" style="position:relative;">
+          <a href="?id=<?php echo $id; ?>&delete_id=<?php echo $row['id']; ?>&action=remove"><span class="icon-trash" style="position: absolute; top: 0px; left: 0px; color: red; font-size:24px;">Delete</span></a>
+          <Br>
             <a href="./../photos/<?php echo $row['image']; ?>" class="d-block photo-item" data-fancybox="gallery">
               <img src="./../photos/<?php echo $row['image']; ?>" alt="Image" class="img-fluid">
               <div class="photo-text-more">
@@ -296,3 +429,68 @@
     
   </body>
 </html>
+
+<!----------------------------------------------------------->
+<!-----------------ADD NEW SERVICE FORM SHIPPING------------->
+<!----------------------------------------------------------->
+<div class="upload_image" 
+style="
+    display: none;
+    position: absolute; 
+    top: 0; 
+    left:0; 
+    background-color: rgba(0,0,0,.5); 
+    width: 100%; 
+    height:100%; 
+    z-index: 2000;
+    align-content:center;
+">
+<Br>
+    <div style="width: 50%; margin:auto;">  
+        <div class="service h-100" style='background-color:white; z-index: 2000;'>
+            <div class="col-lg-6 section-title" style='padding: 25px;'>
+                <span style="font-size:24px; color: rgb(0,123,255); font-weight:bold;">Choose Image</span>
+            </div>
+
+            <form style="padding: 10px 25px; margin-top:8px;" method="POST" autocomplete="off" enctype="multipart/form-data">
+                <label for="avatar">Upload 7 photos at a time.</label>
+                <Br>
+                <input type="file"
+                      id="avatar" name="image1"
+                      accept="image/png, image/jpeg">
+                      <Br><Br>
+                <input type="file"
+                      id="avatar" name="image2"
+                      accept="image/png, image/jpeg">
+                      <Br><Br>
+                <input type="file"
+                      id="avatar" name="image3"
+                      accept="image/png, image/jpeg">
+                      <Br><Br>
+                <input type="file"
+                      id="avatar" name="image4"
+                      accept="image/png, image/jpeg">
+                      <Br><Br>
+                <input type="file"
+                      id="avatar" name="image5"
+                      accept="image/png, image/jpeg">
+                      <Br><Br>
+                <input type="file"
+                      id="avatar" name="image6"
+                      accept="image/png, image/jpeg">
+                      <Br><Br>
+                <input type="file"
+                      id="avatar" name="image7"
+                      accept="image/png, image/jpeg">
+                      <Br><Br>
+                <input type="submit" style="border-radius:0px" value="Save" name="upload" class="btn btn-primary"/> 
+                &nbsp; | &nbsp;
+                <button type="button" style="border-radius:0px" onclick="$('.upload_album').css('display', 'none');" class="btn btn-light">Cancel</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!----------------------------------------------------------->
+<!-----------------UPLOAD ALBUM END------------->
+<!----------------------------------------------------------->
