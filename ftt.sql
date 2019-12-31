@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2019 at 10:06 AM
+-- Generation Time: Dec 31, 2019 at 04:07 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -105,7 +105,7 @@ CREATE TABLE `images` (
 INSERT INTO `images` (`id`, `image`, `type`) VALUES
 (1, '1.png', 'slide'),
 (2, '2.png', 'slide'),
-(3, '3.png', 'slide'),
+(3, '3.png', ''),
 (4, 'logo.png', 'logo');
 
 -- --------------------------------------------------------
@@ -153,7 +153,7 @@ INSERT INTO `other_services` (`id`, `service_name`, `description`, `image`, `act
 (3, 'Fely\'s Pension House', ' ', '30122019073448house.png', ''),
 (4, 'GTL Driving School', ' ', '301220190736384101075.png', ''),
 (5, 'GTL Car Rental', ' ', '3012201907404718827473.png', ''),
-(6, 'Jojo\'s Tracking and Septic Tank Services', ' ', '30122019074155icon_septic_services-300x300.png', '');
+(6, 'Geofel Trucking', '  ', '30122019074155icon_septic_services-300x300.png', '');
 
 -- --------------------------------------------------------
 
@@ -234,7 +234,10 @@ INSERT INTO `photos` (`id`, `album_id`, `image`) VALUES
 (25, 5, 'person_2.jpg'),
 (26, 5, 'person_2.jpg'),
 (27, 5, 'img_4.jpg'),
-(28, 5, 'person_2.jpg');
+(28, 5, 'person_2.jpg'),
+(32, 6, '3112201903210017.jpg'),
+(35, 6, '3112201903501413.png'),
+(36, 6, '3112201903501420.jpg');
 
 -- --------------------------------------------------------
 
@@ -307,7 +310,7 @@ INSERT INTO `tour_destinations` (`id`, `destinations`, `description`, `action`) 
 (1, 'Bohol Water Bike Adventure', ' I. Water Bike Adventure Fun Ride - 1 hour downstream ride with guide and life vest within vicinity of the port. 8:00 am-5:30 pm operational time scale.\r\n<Br><Br>\r\nII. Water Bike Exercise Ride - Offered to all nearby residents. 1 hour exercise ride with guide and life vest within vicinity of the port. 5:30 am-7:30 am operational time scale.\r\n<Br><Br>\r\nIII. Water Bike Adventure Tour - Port to Ugpong Foot Bridge route/ Port to Busai Falls respectively. 2 hours maximum tour with guide and life vest and minimum of 5 persons per tour. 8:00 am-5:00 pm operational time scale.\r\n<Br><Br>\r\nIV. Water Bike Firefly Watching Ride- Port to Canlasid, Loboc route. 3 hours maximum ride and minimum of 2 persons per tour. 7:00 pm-10:00 pm operational time.\r\n<Br><Br>\r\nV. Water Bike Night Adventure Ride- 1 hour ride with guide and life vest within vicinity of the port. 6:00 pm-9:30 pm operational time scale.', ''),
 (2, 'Jardin Necitas', ' At Jardin Necitas, there are LED roses and tulips that light up during nightfall, the stem is made out of a steel bar that the flowers stand on. The entrance is adorned with animals such as flamingos and swans, a perfect background for selfies. This place is perfect for anyone whoâ€™s into taking pictures and having it as a setup for prenups and events. Located on a hilltop in Barangay Bagumbayan, Jardin Necitas Pilar Glowing Garden has a colorful and romantic scenery.', ''),
 (3, 'Sagbayan Peak', ' A Tourism Site overlooking a scenic valley with an observation platform and children\'s playground. A destination with whimsical animal sculptures, a small waterpark & swings, plus a cafe.', ''),
-(4, 'Bet N Choy Farms', ' Bet \'n Choy Farms is an attraction / resort offering a wholesome destination and perfect place for family getaway and picnic. This resort has huge pools and water slides for adult and kids. Itâ€™s a perfect getaway for family to enjoy water, pool and sun. The farm is located in Catigbian, Bohol, about 900 meters from the Catigbian PNP Station and is about an hour trip from Tagbilaran City.', ''),
+(4, 'Bet N Choy Farms', ' Bet \'n Choy Farms is an attraction / resort offering a wholesome destination and perfect place for family getaway and picnic. This resort has huge pools and water slides for adult and kids. Itâ€™s a perfect getaway for family to enjoy water, pool and sun. The farm is located in Catigbian, Bohol, about 900 meters from the Catigbian PNP Station and is about an hour trip from Tagbilaran City.', 'ARCHIVE'),
 (5, 'Cabagnow Cave Pool', ' Anda in Bohol is famous for its long white sand beach but for the traveler, there are other options, like the beautiful and cool cave pools. These are refreshing alternatives to sun worshiping. Because of the soft nature of the rock, over time, the action of water and other geologic activities has led to the formations of caves across, not just in the municipality but in many parts of Bohol.\r\n\r\nCabagnow Cave Pool in Anda Bohol is famous for its long white sand beach but for the traveler, there are other options, like the beautiful and cool cave pools. These are refreshing alternatives to sun worshiping. Because of the soft nature of the rock, over time, the action of water and other geologic activities has led to the formations of caves across, not just in the municipality but in many parts of Bohol.', ''),
 (6, 'Sea of Clouds', 'Sea of Clouds in Anda Bohol is famous for its long white sand beach but for the traveler, there are other options, like the beautiful and cool cave pools. These are refreshing alternatives to sun worshiping. Because of the soft nature of the rock, over time, the action of water and other geologic activities has led to the formations of caves across, not just in the municipality but in many parts of Bohol.', ''),
 (7, 'Candijay Falls', ' Caumantad Falls a 30 minute travel from the Poblacion of Candijay and youâ€™re going to see this amazing and stunning water fall. You will be in awe in Mother Natureâ€™s Beauty. A 60 feet high and is said to be the tallest waterfall in Bohol. Itâ€™s clean, clear and cold water will surely entice you to enjoy swimming.\r\n\r\nThis site is suitable for picnics and other fun activities like river trekking and swimming with your loved ones. Have a free back massage with the splash of heavy flowing water. The experience is priceless if you visit and swim to this highest falls. Aside from the waterfalls; Candijay has still a lot more to offer.', '');
@@ -389,7 +392,7 @@ CREATE TABLE `updates` (
 --
 
 INSERT INTO `updates` (`id`, `posted`, `header`, `description`, `image`, `action`) VALUES
-(16, '2019-12-30 05:53:39', 'New Payment Method', ' We now accept payment through MLHUILLIER, just go to your nearest MLHUILLIER outlet and say payment for \"FELY\'S TOURS AND TRAVEL\".', '30122019065339ML.png', '');
+(16, '2019-12-30 05:53:39', 'New Payment Method', ' We now accept payment through MLHUILLIER, just go to your nearest MLHUILLIER outlet and say payment for \"FELY\'S TOURS AND TRAVEL\".', '30122019065339ML.png', 'ACTIVE');
 
 -- --------------------------------------------------------
 
@@ -412,7 +415,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`, `last_active`, `status`, `token`) VALUES
-(2, 'Admin', 'admin2019', 'Administrators', '2019-12-30 01:44:52', '', '0923j21313fasf12090asdi09m');
+(2, 'admin', 'admin2020', 'Administrators', '2019-12-30 01:44:52', '', '0923j21313fasf12090asdi09m');
 
 --
 -- Indexes for dumped tables
@@ -561,7 +564,7 @@ ALTER TABLE `package_destinations`
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `services`
