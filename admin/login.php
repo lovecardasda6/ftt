@@ -13,13 +13,16 @@
     $exec = mysqli_query($con, $q);
     $fetch = mysqli_fetch_assoc($exec);
     $id = $fetch['id'];
+    
+    $count = mysqli_num_rows($exec);
 
-    if($id != 0 || $id != NULL || !empty($id))
+    if($count != 0 )
     {
       $token = "0923j21313fasf12090asdi09m";
       $q = "UPDATE users SET `token` = '".$token."' WHERE `id` = ".$id;
       $exec = mysqli_query($con, $q);
       $_SESSION['token'] = $token;
+      $_SESSION['id'] = $id;
       header("Location: home.php");
     }
     else

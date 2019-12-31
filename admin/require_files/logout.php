@@ -1,6 +1,14 @@
 <?php
 
 session_start();
-unset($_SESSION['token']);
+require_once __DIR__."./config.php";
+$id = $_SESSION['id'];
 
-header("Location:./../login.php");
+$q = "UPDATE users SET `token` = NULL WHERE `id` = ".$id;
+$res = mysqli_query($con,$q);
+if($res){
+    header("Location:./../login.php");
+}
+else{
+    echo "FAILED";
+}
